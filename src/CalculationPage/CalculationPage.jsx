@@ -1,5 +1,6 @@
 import { Tabs } from "flowbite-react";
 import "./CalculationPage.css";
+import Swal from "sweetalert2";
 
 const CalculationPage = () => {
   const handleCourseInput = (event) => {
@@ -46,10 +47,6 @@ const CalculationPage = () => {
     const g9c10grade10point = form.g9c10grade10.value;
     const g9c10cradit10 = form.g9c10cradit10.value;
 
-
-
-
-
     const g10c1course1name = form.g10c1course1.value;
     const g10c1subject1name = form.g10c1subject1.value;
     const g10c1grade1point = form.g10c1grade1.value;
@@ -91,9 +88,6 @@ const CalculationPage = () => {
     const g10c10grade10point = form.g10c10grade10.value;
     const g10c10cradit10 = form.g10c10cradit10.value;
 
-
-
-    
     const g11c1course1name = form.g11c1course1.value;
     const g11c1subject1name = form.g11c1subject1.value;
     const g11c1grade1point = form.g11c1grade1.value;
@@ -134,9 +128,6 @@ const CalculationPage = () => {
     const g11c10subject10name = form.g10c10subject10.value;
     const g11c10grade10point = form.g10c10grade10.value;
     const g11c10cradit10 = form.g10c10cradit10.value;
-
-
-
 
     const g12c1course1name = form.g12c1course1.value;
     const g12c1subject1name = form.g12c1subject1.value;
@@ -179,9 +170,7 @@ const CalculationPage = () => {
     const g12c10grade10point = form.g10c10grade10.value;
     const g12c10cradit10 = form.g10c10cradit10.value;
 
-
-
-    console.log(
+    const coursedata = {
       g9c1course1name,
       g9c1subject1name,
       g9c1grade1point,
@@ -342,7 +331,22 @@ const CalculationPage = () => {
       g12c10subject10name,
       g12c10grade10point,
       g12c10cradit10,
-    );
+    };
+    console.log(coursedata);
+
+    fetch("http://localhost:5000/courses", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(coursedata),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire("SUCCESS", "Your GPA is Calculating", "successfully");
+        }
+      });
   };
 
   return (
@@ -379,10 +383,10 @@ const CalculationPage = () => {
                   name="g9c1grade1"
                   id="g9c1grade1"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -427,10 +431,10 @@ const CalculationPage = () => {
                   name="g9c2grade2"
                   id="g9c2grade2"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -475,10 +479,10 @@ const CalculationPage = () => {
                   name="g9c3grade3"
                   id="g9c3grade3"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -523,10 +527,10 @@ const CalculationPage = () => {
                   name="g9c4grade4"
                   id="g9c4grade4"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -571,10 +575,10 @@ const CalculationPage = () => {
                   name="g9c5grade5"
                   id="g9c5grade5"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -619,10 +623,10 @@ const CalculationPage = () => {
                   name="g9c6grade6"
                   id="g9c6grade6"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -667,10 +671,10 @@ const CalculationPage = () => {
                   name="g9c7grade7"
                   id="g9c7grade7"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -715,10 +719,10 @@ const CalculationPage = () => {
                   name="g9c8grade8"
                   id="g9c8grade8"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -763,10 +767,10 @@ const CalculationPage = () => {
                   name="g9c9grade9"
                   id="g9c9grade9"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -811,10 +815,10 @@ const CalculationPage = () => {
                   name="g9c10grade10"
                   id="g9c10grade10"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -861,10 +865,10 @@ const CalculationPage = () => {
                   name="g10c1grade1"
                   id="g10c1grade1"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -909,10 +913,10 @@ const CalculationPage = () => {
                   name="g10c2grade2"
                   id="g10c2grade2"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -957,10 +961,10 @@ const CalculationPage = () => {
                   name="g10c3grade3"
                   id="g10c3grade3"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1005,10 +1009,10 @@ const CalculationPage = () => {
                   name="g10c4grade4"
                   id="g10c4grade4"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1053,10 +1057,10 @@ const CalculationPage = () => {
                   name="g10c5grade5"
                   id="g10c5grade5"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1101,10 +1105,10 @@ const CalculationPage = () => {
                   name="g10c6grade6"
                   id="g10c6grade6"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1149,10 +1153,10 @@ const CalculationPage = () => {
                   name="g10c7grade7"
                   id="g10c7grade7"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1197,10 +1201,10 @@ const CalculationPage = () => {
                   name="g10c8grade8"
                   id="g10c8grade8"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1245,10 +1249,10 @@ const CalculationPage = () => {
                   name="g10c9grade9"
                   id="g10c9grade9"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1293,10 +1297,10 @@ const CalculationPage = () => {
                   name="g10c10grade10"
                   id="g10c10grade10"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1343,10 +1347,10 @@ const CalculationPage = () => {
                   name="g11c1grade1"
                   id="g11c1grade1"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1391,10 +1395,10 @@ const CalculationPage = () => {
                   name="g11c2grade2"
                   id="g11c2grade2"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1439,10 +1443,10 @@ const CalculationPage = () => {
                   name="g11c3grade3"
                   id="g11c3grade3"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1487,10 +1491,10 @@ const CalculationPage = () => {
                   name="g11c4grade4"
                   id="g11c4grade4"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1535,10 +1539,10 @@ const CalculationPage = () => {
                   name="g11c5grade5"
                   id="g11c5grade5"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1583,10 +1587,10 @@ const CalculationPage = () => {
                   name="g11c6grade6"
                   id="g11c6grade6"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1631,10 +1635,10 @@ const CalculationPage = () => {
                   name="g11c7grade7"
                   id="g11c7grade7"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1679,10 +1683,10 @@ const CalculationPage = () => {
                   name="g11c8grade8"
                   id="g11c8grade8"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1727,10 +1731,10 @@ const CalculationPage = () => {
                   name="g11c9grade9"
                   id="g11c9grade9"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1775,10 +1779,10 @@ const CalculationPage = () => {
                   name="g11c10grade10"
                   id="g11c10grade10"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1825,10 +1829,10 @@ const CalculationPage = () => {
                   name="g12c1grade1"
                   id="g12c1grade1"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1873,10 +1877,10 @@ const CalculationPage = () => {
                   name="g12c2grade2"
                   id="g12c2grade2"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1921,10 +1925,10 @@ const CalculationPage = () => {
                   name="g12c3grade3"
                   id="g12c3grade3"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -1969,10 +1973,10 @@ const CalculationPage = () => {
                   name="g12c4grade4"
                   id="g12c4grade4"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -2017,10 +2021,10 @@ const CalculationPage = () => {
                   name="g12c5grade5"
                   id="g12c5grade5"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -2065,10 +2069,10 @@ const CalculationPage = () => {
                   name="g12c6grade6"
                   id="g12c6grade6"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -2113,10 +2117,10 @@ const CalculationPage = () => {
                   name="g12c7grade7"
                   id="g12c7grade7"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -2161,10 +2165,10 @@ const CalculationPage = () => {
                   name="g12c8grade8"
                   id="g12c8grade8"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -2209,10 +2213,10 @@ const CalculationPage = () => {
                   name="g12c9grade9"
                   id="g12c9grade9"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
@@ -2257,10 +2261,10 @@ const CalculationPage = () => {
                   name="g12c10grade10"
                   id="g12c10grade10"
                 >
-                  <option value="A">A (90-100)%</option>
-                  <option value="B">B (80-89)%</option>
-                  <option value="C">C (70-79)%</option>
-                  <option value="D">D (60-69)%</option>
+                  <option value="4">A (90-100)%</option>
+                  <option value="3">B (80-89)%</option>
+                  <option value="3">C (70-79)%</option>
+                  <option value="1">D (60-69)%</option>
                 </select>
               </div>
               <div className="w-1/4">
