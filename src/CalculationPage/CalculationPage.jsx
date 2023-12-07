@@ -2396,7 +2396,9 @@ const CalculationPage = () => {
         </Tabs>
 
   
-        <input type="submit" />
+       <div className="text-center mt-16">
+       <input type="submit" className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#0b111c] duration-500  bg-[#21498B] text-white" value="Start GPA Calculation" />
+       </div>
     
       </form>
     </div>
