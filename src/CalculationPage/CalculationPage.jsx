@@ -379,9 +379,9 @@ const CalculationPage = () => {
 
   return (
     <div className="w-[1140px] mx-auto pt-16">
-      <form onSubmit={handleCourseInput}>
-        <Tabs className="" aria-label="Pills" style="pills">
-          <Tabs.Item active title="grade 9">
+      <form className="px-[87px] py-[90px] " onSubmit={handleCourseInput}>
+      <Tabs  style="underline">
+      <Tabs.Item active title="Grade 9" >
             <div className="flex justify-between gap-8 mb-6">
               <div className="w-1/4">
                 <input
@@ -390,6 +390,7 @@ const CalculationPage = () => {
                   id="g9c1course1"
                   placeholder="Type Your Course Title..."
                   type="text"
+                  required
                 />
               </div>
               <div className="w-1/4">
@@ -397,6 +398,7 @@ const CalculationPage = () => {
                   className="py-3 px-[18px] bg-[#FDF0EA] border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                   name="g9c1subject1"
                   id="g9c1subject1"
+                  required
                 >
                   <option>Select Subject</option>
                   <option value="English">English</option>
@@ -410,7 +412,9 @@ const CalculationPage = () => {
                   className="py-3 px-[18px] bg-[#FDF0EA] border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                   name="g9c1grade1"
                   id="g9c1grade1"
+                  required
                 >
+                  <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -422,7 +426,9 @@ const CalculationPage = () => {
                   className="py-3 px-[18px] bg-[#FDF0EA] border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                   name="g9c1cradit1"
                   id="g9c1cradit1"
+                  required
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -459,6 +465,7 @@ const CalculationPage = () => {
                   name="g9c2grade2"
                   id="g9c2grade2"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -471,6 +478,7 @@ const CalculationPage = () => {
                   name="g9c2cradit2"
                   id="g9c2cradit2"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -507,6 +515,7 @@ const CalculationPage = () => {
                   name="g9c3grade3"
                   id="g9c3grade3"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -519,6 +528,7 @@ const CalculationPage = () => {
                   name="g9c3cradit3"
                   id="g9c3cradit3"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -555,6 +565,7 @@ const CalculationPage = () => {
                   name="g9c4grade4"
                   id="g9c4grade4"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -567,6 +578,7 @@ const CalculationPage = () => {
                   name="g9c4cradit4"
                   id="g9c4cradit4"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -603,6 +615,7 @@ const CalculationPage = () => {
                   name="g9c5grade5"
                   id="g9c5grade5"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -615,6 +628,7 @@ const CalculationPage = () => {
                   name="g9c5cradit5"
                   id="g9c5cradit5"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -651,6 +665,7 @@ const CalculationPage = () => {
                   name="g9c6grade6"
                   id="g9c6grade6"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -663,6 +678,7 @@ const CalculationPage = () => {
                   name="g9c6cradit6"
                   id="g9c6cradit6"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -699,6 +715,7 @@ const CalculationPage = () => {
                   name="g9c7grade7"
                   id="g9c7grade7"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -711,6 +728,7 @@ const CalculationPage = () => {
                   name="g9c7cradit7"
                   id="g9c7cradit7"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -747,6 +765,7 @@ const CalculationPage = () => {
                   name="g9c8grade8"
                   id="g9c8grade8"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -759,6 +778,7 @@ const CalculationPage = () => {
                   name="g9c8cradit8"
                   id="g9c8cradit8"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -795,6 +815,7 @@ const CalculationPage = () => {
                   name="g9c9grade9"
                   id="g9c9grade9"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -807,6 +828,7 @@ const CalculationPage = () => {
                   name="g9c9cradit9"
                   id="g9c9cradit9"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -843,6 +865,7 @@ const CalculationPage = () => {
                   name="g9c10grade10"
                   id="g9c10grade10"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -855,6 +878,7 @@ const CalculationPage = () => {
                   name="g9c10cradit10"
                   id="g9c10cradit10"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -893,6 +917,7 @@ const CalculationPage = () => {
                   name="g10c1grade1"
                   id="g10c1grade1"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -905,6 +930,7 @@ const CalculationPage = () => {
                   name="g10c1cradit1"
                   id="g10c1cradit1"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -941,6 +967,7 @@ const CalculationPage = () => {
                   name="g10c2grade2"
                   id="g10c2grade2"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -953,6 +980,7 @@ const CalculationPage = () => {
                   name="g10c2cradit2"
                   id="g10c2cradit2"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -989,6 +1017,7 @@ const CalculationPage = () => {
                   name="g10c3grade3"
                   id="g10c3grade3"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1001,6 +1030,7 @@ const CalculationPage = () => {
                   name="g10c3cradit3"
                   id="g10c3cradit3"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1037,6 +1067,7 @@ const CalculationPage = () => {
                   name="g10c4grade4"
                   id="g10c4grade4"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1049,6 +1080,7 @@ const CalculationPage = () => {
                   name="g10c4cradit4"
                   id="g10c4cradit4"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1085,6 +1117,7 @@ const CalculationPage = () => {
                   name="g10c5grade5"
                   id="g10c5grade5"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1097,6 +1130,7 @@ const CalculationPage = () => {
                   name="g10c5cradit5"
                   id="g10c5cradit5"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1133,6 +1167,7 @@ const CalculationPage = () => {
                   name="g10c6grade6"
                   id="g10c6grade6"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1145,6 +1180,7 @@ const CalculationPage = () => {
                   name="g10c6cradit6"
                   id="g10c6cradit6"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1181,6 +1217,7 @@ const CalculationPage = () => {
                   name="g10c7grade7"
                   id="g10c7grade7"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1193,6 +1230,7 @@ const CalculationPage = () => {
                   name="g10c7cradit7"
                   id="g10c7cradit7"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1229,6 +1267,7 @@ const CalculationPage = () => {
                   name="g10c8grade8"
                   id="g10c8grade8"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1241,6 +1280,7 @@ const CalculationPage = () => {
                   name="g10c8cradit8"
                   id="g10c8cradit8"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1277,6 +1317,7 @@ const CalculationPage = () => {
                   name="g10c9grade9"
                   id="g10c9grade9"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1289,6 +1330,7 @@ const CalculationPage = () => {
                   name="g10c9cradit9"
                   id="g10c9cradit9"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1325,6 +1367,7 @@ const CalculationPage = () => {
                   name="g10c10grade10"
                   id="g10c10grade10"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1337,6 +1380,7 @@ const CalculationPage = () => {
                   name="g10c10cradit10"
                   id="g10c10cradit10"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1375,6 +1419,7 @@ const CalculationPage = () => {
                   name="g11c1grade1"
                   id="g11c1grade1"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1387,6 +1432,7 @@ const CalculationPage = () => {
                   name="g11c1cradit1"
                   id="g11c1cradit1"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1423,6 +1469,7 @@ const CalculationPage = () => {
                   name="g11c2grade2"
                   id="g11c2grade2"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1435,6 +1482,7 @@ const CalculationPage = () => {
                   name="g11c2cradit2"
                   id="g11c2cradit2"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1471,6 +1519,7 @@ const CalculationPage = () => {
                   name="g11c3grade3"
                   id="g11c3grade3"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1483,6 +1532,7 @@ const CalculationPage = () => {
                   name="g11c3cradit3"
                   id="g11c3cradit3"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1519,6 +1569,7 @@ const CalculationPage = () => {
                   name="g11c4grade4"
                   id="g11c4grade4"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1531,6 +1582,7 @@ const CalculationPage = () => {
                   name="g11c4cradit4"
                   id="g11c4cradit4"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1567,6 +1619,7 @@ const CalculationPage = () => {
                   name="g11c5grade5"
                   id="g11c5grade5"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1579,6 +1632,7 @@ const CalculationPage = () => {
                   name="g11c5cradit5"
                   id="g11c5cradit5"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1615,6 +1669,7 @@ const CalculationPage = () => {
                   name="g11c6grade6"
                   id="g11c6grade6"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1627,6 +1682,7 @@ const CalculationPage = () => {
                   name="g11c6cradit6"
                   id="g11c6cradit6"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1663,6 +1719,7 @@ const CalculationPage = () => {
                   name="g11c7grade7"
                   id="g11c7grade7"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1675,6 +1732,7 @@ const CalculationPage = () => {
                   name="g11c7cradit7"
                   id="g11c7cradit7"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1711,6 +1769,7 @@ const CalculationPage = () => {
                   name="g11c8grade8"
                   id="g11c8grade8"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1723,6 +1782,7 @@ const CalculationPage = () => {
                   name="g11c8cradit8"
                   id="g11c8cradit8"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1759,6 +1819,7 @@ const CalculationPage = () => {
                   name="g11c9grade9"
                   id="g11c9grade9"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1771,6 +1832,7 @@ const CalculationPage = () => {
                   name="g11c9cradit9"
                   id="g11c9cradit9"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1807,6 +1869,7 @@ const CalculationPage = () => {
                   name="g11c10grade10"
                   id="g11c10grade10"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1819,6 +1882,7 @@ const CalculationPage = () => {
                   name="g11c10cradit10"
                   id="g11c10cradit10"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1857,6 +1921,7 @@ const CalculationPage = () => {
                   name="g12c1grade1"
                   id="g12c1grade1"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1869,6 +1934,7 @@ const CalculationPage = () => {
                   name="g12c1cradit1"
                   id="g12c1cradit1"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1905,6 +1971,7 @@ const CalculationPage = () => {
                   name="g12c2grade2"
                   id="g12c2grade2"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1917,6 +1984,7 @@ const CalculationPage = () => {
                   name="g12c2cradit2"
                   id="g12c2cradit2"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -1953,6 +2021,7 @@ const CalculationPage = () => {
                   name="g12c3grade3"
                   id="g12c3grade3"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -1965,6 +2034,7 @@ const CalculationPage = () => {
                   name="g12c3cradit3"
                   id="g12c3cradit3"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2001,6 +2071,7 @@ const CalculationPage = () => {
                   name="g12c4grade4"
                   id="g12c4grade4"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2013,6 +2084,7 @@ const CalculationPage = () => {
                   name="g12c4cradit4"
                   id="g12c4cradit4"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2049,6 +2121,7 @@ const CalculationPage = () => {
                   name="g12c5grade5"
                   id="g12c5grade5"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2061,6 +2134,7 @@ const CalculationPage = () => {
                   name="g12c5cradit5"
                   id="g12c5cradit5"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2097,6 +2171,7 @@ const CalculationPage = () => {
                   name="g12c6grade6"
                   id="g12c6grade6"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2109,6 +2184,7 @@ const CalculationPage = () => {
                   name="g12c6cradit6"
                   id="g12c6cradit6"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2145,6 +2221,7 @@ const CalculationPage = () => {
                   name="g12c7grade7"
                   id="g12c7grade7"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2157,6 +2234,7 @@ const CalculationPage = () => {
                   name="g12c7cradit7"
                   id="g12c7cradit7"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2193,6 +2271,7 @@ const CalculationPage = () => {
                   name="g12c8grade8"
                   id="g12c8grade8"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2205,6 +2284,7 @@ const CalculationPage = () => {
                   name="g12c8cradit8"
                   id="g12c8cradit8"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2241,6 +2321,7 @@ const CalculationPage = () => {
                   name="g12c9grade9"
                   id="g12c9grade9"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2253,6 +2334,7 @@ const CalculationPage = () => {
                   name="g12c9cradit9"
                   id="g12c9cradit9"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>
@@ -2289,6 +2371,7 @@ const CalculationPage = () => {
                   name="g12c10grade10"
                   id="g12c10grade10"
                 >
+                   <option >Course Grade</option>
                   <option value="4">A (90-100)%</option>
                   <option value="3">B (80-89)%</option>
                   <option value="3">C (70-79)%</option>
@@ -2301,6 +2384,7 @@ const CalculationPage = () => {
                   name="g12c10cradit10"
                   id="g12c10cradit10"
                 >
+                  <option >Unit of Credit</option>
                   <option value="0.25">1 quarter unit = 0.25 unit</option>
                   <option value="0.34">1 trimester unit = 0.34 unit</option>
                   <option value="0.50">1 semesterr unit = 0.50 unit</option>

@@ -348,9 +348,9 @@ console.log(g9c1grade1point,g9c8grade8point,g12c9grade9point)
 
       <div className="">
         
-         <p><ShowGrade number={parseInt(g9c1grade1point)}> </ShowGrade></p>
-         <p><ShowGrade number={parseInt(g9c8grade8point)}> </ShowGrade></p>
-         <p><ShowGrade number={parseInt(g12c9grade9point)}> </ShowGrade></p>
+         <p><ShowGrade number={g9c1grade1point}> </ShowGrade></p>
+         <p><ShowGrade number={g9c8grade8point}> </ShowGrade></p>
+         <p><ShowGrade number={g12c9grade9point}> </ShowGrade></p>
 
       </div> 
     </div>
