@@ -1,6 +1,9 @@
 import { Tabs } from "flowbite-react";
 import "./CalculationPage.css";
 import Swal from "sweetalert2";
+import ShowResult from "../ShowResult/ShowResult";
+
+
 
 const CalculationPage = () => {
   const handleCourseInput = (event) => {
@@ -334,6 +337,23 @@ const CalculationPage = () => {
     };
     console.log(coursedata);
 
+    // fetch("http://localhost:5000/courses", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(coursedata),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.insertedId) {
+    //       Swal.fire("SUCCESS", "Your GPA is Calculating", "successfully");
+    //       console.log(data.insertedId)
+    //     }
+    //   });
+
+
+
     fetch("http://localhost:5000/courses", {
       method: "POST",
       headers: {
@@ -341,12 +361,20 @@ const CalculationPage = () => {
       },
       body: JSON.stringify(coursedata),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire("SUCCESS", "Your GPA is Calculating", "successfully");
-        }
-      });
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.insertedId) {
+        Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
+        console.log(data.insertedId);
+        
+        setTimeout(() => {
+          window.location.href = `/ShowResult/${data.insertedId}`;
+          <ShowResult id={data.insertedId}></ShowResult>
+          // Redirect to the ShowResult component with the insertedId as a route parameter
+        }, 4000); // Redirect after 4 seconds (4000 milliseconds)
+      }
+    });
+    
   };
 
   return (
@@ -2283,7 +2311,9 @@ const CalculationPage = () => {
           </Tabs.Item>
         </Tabs>
 
+  
         <input type="submit" />
+    
       </form>
     </div>
   );
