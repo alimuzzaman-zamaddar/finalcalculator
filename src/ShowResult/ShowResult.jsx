@@ -1,43 +1,4 @@
-// import { useEffect, useState } from "react";
 
-// const ShowResult = () => {
-
-//     const [allCourses, setAllCourses] = useState([]);
-
-//     useEffect(() => {
-//       fetch("http://localhost:5000/courses")
-//         .then((res) => res.json())
-//         .then((data) => setAllCourses(data));
-//     }, []);
-//     return (
-//         <div>
-
-//             {
-//                 allCourses.map(course =>  (
-
-//                     <div key={course._id}>
-
-//                         <h1>{course.g9c4course4name}</h1>
-//                         <h1>{course.g9c1subject1name}</h1>
-//                         <h1>{course.g9c1grade1point}</h1>
-//                         <h1>{course.g9c1grade1point}</h1>
-//                         <h1>{course.g9c1cradit1}</h1>
-//                         <h1>{course.g9c2course2name}</h1>
-//                         <h1>{course.g9c2subject2name}</h1>
-//                         <h1>{course.g9c2grade2point}</h1>
-//                         <h1>{course.g9c2cradit2}</h1>
-//                         <h1>{course.g9c3course3name}</h1>
-//                         <h1>{course.g9c3subject3name}</h1>
-
-//                     </div>
-//                 ))
-//             }
-
-//         </div>
-//     );
-// };
-
-// export default ShowResult;
 import "./ShereResult";
 import { useLoaderData } from "react-router-dom"; // Import useParams from react-router-dom
 import ShowGrade from "./ShowGrade";
@@ -48,6 +9,7 @@ const ShowResult = () => {
 
 
   const {
+    satScore,
     g9c1course1name,
     g9c1subject1name,
     g9c1grade1point,
@@ -323,7 +285,7 @@ const ShowResult = () => {
 
   
 
-console.log(g9c1grade1point,g9c8grade8point,g12c9grade9point)
+
 
 
 
@@ -347,7 +309,8 @@ console.log(g9c1grade1point,g9c8grade8point,g12c9grade9point)
       )}
 
       <div className="">
-        
+        <h1>{g9c1grade1point}</h1>
+        <h1>{g10c1grade1point}</h1>
          <p><ShowGrade number={g9c1grade1point}> </ShowGrade></p>
          <p><ShowGrade number={g9c8grade8point}> </ShowGrade></p>
          <p><ShowGrade number={g12c9grade9point}> </ShowGrade></p>

@@ -1,11 +1,11 @@
 .flex.text-center.flex-wrap.-mb-px.border-b.border-gray-200.dark\:border-gray-700 {
     justify-content: space-around;
-    width: 1000px;
+    max-width: 1000px;
     margin: 1px auto 32px auto;
 }
 .focus\:ring-4:focus {
     /* --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); */
-    /* --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color); */
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) rgb(32 117 129 / 0%);
     /* box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); */
 }
 
@@ -31,3 +31,83 @@ button#\:r1\:-tab-3 {
     font-size: 32px;
     
 }
+
+.box-shadow-class{
+    border-radius: 16px;
+    background: #FFF;
+    
+    /* shadow */
+    box-shadow: 0px 4px 8px 0px rgba(24, 39, 75, 0.06), 0px -4px 8px 0px rgba(24, 39, 75, 0.06);
+    margin-bottom: 100px;
+}
+button{
+    outline: 0 !important;
+}
+button:focus{
+    outline: 0 !important;
+}
+.clc-radio-wrap input{
+    -webkit-appearance: none;
+    position: relative;
+    cursor: pointer;
+}
+.clc-radio-wrap input::before{
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: transparent;
+}
+.clc-radio-wrap input::after{
+    content: "";
+    position: absolute;
+    left: -16.5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #98A2B3;
+    top: -12.6px;
+}
+.clc-radio-wrap input#no::after{
+    left: -17.5px;
+}
+.clc-radio-wrap input:checked::before{
+    background: #ED692A;
+}
+.clc-radio-wrap input:checked::after{
+    border-color: #ED692A;
+}
+  
+  
+
+
+@media only screen and (max-width: 600px) {
+    button#\:r1\:-tab-1 {
+        font-size: 20px;
+    
+    }
+    button#\:r1\:-tab-2 {
+        font-size: 20px;
+      
+    }
+    button#\:r1\:-tab-3 {
+        font-size: 20px;
+    
+    }
+    .first\:ml-0:first-child {
+        margin-left: 0px;
+        font-size: 20px;
+        
+    }
+    .md\:flex.items-center.gap-3.text-xl {
+        text-align: center;
+    }
+    input#satScore {
+        display: flex;
+        margin: 0 auto;
+    }
+
+  }

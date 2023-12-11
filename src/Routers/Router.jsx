@@ -17,7 +17,7 @@ const Router = createBrowserRouter([
     {
       path: "/ShowResult/:id",
       element:   <ShowResult></ShowResult> ,
-      loader:  ({params}) => fetch(`http://localhost:5000/courses/${params.id}`),
+      loader:  ({params}) => fetch(`https://gpacalulatorserver.vercel.app/courses/${params.id}`),
     },
    
 

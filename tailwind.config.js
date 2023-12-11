@@ -6,7 +6,11 @@ export default {
     'node_modules/flowbite-react/lib/esm/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      ring: {
+        '4' : '0px'
+      }
+    },
   },
   plugins:[ ],
 }
