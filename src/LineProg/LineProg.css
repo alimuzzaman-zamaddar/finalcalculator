@@ -1,0 +1,21 @@
+.ProgressBar {
+    height: 40px;
+    border-radius: 10px;
+  }
+  
+ 
+  @media (max-width: 768px) {
+    .ProgressBar {
+      height: 30px;
+      border-radius: 5px;
+    }
+  }
+
+  .ProgressBar {
+    transition-duration: 2s;
+    animation: true;
+
+    background-color: #ED692A;
+
+  }
+  

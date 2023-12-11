@@ -1,0 +1,36 @@
+.progress-area {
+    height: 300px;
+    width: 300px;
+    background-color: #ffffff;
+    position: absolute;
+
+    border-radius: 300px;
+
+    display: grid;
+    place-items: center;
+  }
+
+  .circular-progress {
+    position: relative;
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  .circular-progress:before {
+    content: "";
+    position: absolute;
+    height: 84%;
+    width: 84%;
+    background-color: white;
+    border-radius: 50%;
+  }
+  .value-container {
+    color: var(--neutral-800, #1D2939);
+    font-family: Hind;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; 
+  }

@@ -341,21 +341,7 @@ const CalculationPage = () => {
       satScore
     };
     console.log(coursedata);
-
-    // fetch("http://localhost:5000/courses", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(coursedata),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.insertedId) {
-    //       Swal.fire("SUCCESS", "Your GPA is Calculating", "successfully");
-    //       console.log(data.insertedId)
-    //     }
-    //   });
+    
   if(g9c1subject1name == ""){
     alert("please select the subject")
 

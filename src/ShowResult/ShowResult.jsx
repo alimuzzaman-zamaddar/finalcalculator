@@ -1,7 +1,10 @@
 
 import "./ShereResult";
+
 import { useLoaderData } from "react-router-dom"; // Import useParams from react-router-dom
-import ShowGrade from "./ShowGrade";
+import GreadArea from "../GreadArea/GreadArea";
+import LineProg from "../LineProg/LineProg";
+import CircularProgress from "../CircularProgress/CircularProgress";
 
 const ShowResult = () => {
   //   const { id } = useParams(); // Get the insertedId from route params
@@ -297,26 +300,50 @@ const ShowResult = () => {
 
 
   return (
-    <div>
-      {selectedCourse && (
-        <div key={selectedCourse._id}>
-          {/* Display the specific course data */}
-          <h1>{g9c1cradit1}</h1>
-          <h1>{g9c1grade1point}</h1>
-          <h1>{g9c1subject1name}</h1>
-          {/* Other course data */}
-        </div>
-      )}
+    <>
 
-      <div className="">
-        <h1>{g9c1grade1point}</h1>
-        <h1>{g10c1grade1point}</h1>
-         <p><ShowGrade number={g9c1grade1point}> </ShowGrade></p>
-         <p><ShowGrade number={g9c8grade8point}> </ShowGrade></p>
-         <p><ShowGrade number={g12c9grade9point}> </ShowGrade></p>
+     
 
-      </div> 
-    </div>
+   <section className="gpa-sections max-w-7xl mx-auto mt-11 p-2  md:p-14">
+     <section className="w-full flex justify-center  ">
+       <section className="progressbar-area grid-cols-1 items-center justify-center ">
+         <h1 className="pb-10  text-center">SAT Score : {satScore}</h1>
+         <section className="progressbar  ">
+           <CircularProgress Grade9FinalGPA={Grade9FinalGPA}></CircularProgress>
+         </section>
+       </section>
+     </section>
+{/* 
+     <section className="pb-24">
+       { <CircularProgress></CircularProgress> }
+     </section> */}
+     <section className=" ">
+       <section className="w-full flex justify-center md:mb-11 ">
+         <section className=" w-full grid-cols-1 items-center ">
+           <section className="hg bgpic ">
+             <LineProg Grade9FinalGPA={Grade9FinalGPA}></LineProg>
+           </section>
+         </section>
+       </section>
+
+       <section className="border">
+         <GreadArea selectedCourse={selectedCourse}></GreadArea>
+       </section>
+     </section>
+     
+   <div className="text-center mt-16">
+       <input type="submit" className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#0b111c] duration-500  bg-[#21498B] text-white" value="Share Result" />
+       </div>
+   </section>
+
+
+
+
+
+
+
+
+   </>
   );
 };
 
