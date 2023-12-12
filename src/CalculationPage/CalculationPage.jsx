@@ -358,12 +358,8 @@ const CalculationPage = () => {
         if (data.insertedId) {
           Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
           console.log(data.insertedId);
-
-          setTimeout(() => {
             window.location.href = `/ShowResult/${data.insertedId}`;
             <ShowResult id={data.insertedId}></ShowResult>;
-            // Redirect to the ShowResult component with the insertedId as a route parameter
-          }, 2000); // Redirect after 4 seconds (4000 milliseconds)
         }
       });
 

@@ -1,14 +1,14 @@
 import  { useEffect, useRef } from "react";
 import "./CircularProgress.css";
 
-const CircularProgress = (Grade9FinalGPA) => {
+const CircularProgress = (finalAvarage) => {
   const progressBarRef = useRef(null);
   const valueContainerRef = useRef(null);
 
   useEffect(() => {
 
 
-    const resultRound = parseFloat(Grade9FinalGPA.Grade9FinalGPA);
+    const resultRound = parseFloat(finalAvarage.finalAvarage);
     const progressBar = progressBarRef.current;
     const valueContainer = valueContainerRef.current;
 
@@ -37,7 +37,7 @@ const CircularProgress = (Grade9FinalGPA) => {
     }, speed);
 
     return () => clearInterval(progress);
-  }, [Grade9FinalGPA]); 
+  }, [finalAvarage]); 
 
   return (
     <div>

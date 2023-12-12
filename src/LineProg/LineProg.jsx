@@ -3,17 +3,15 @@ import "./LineProg.css";
 
 
 
-const LineProg = (Grade9FinalGPA) => {
-    
-    console.log(Grade9FinalGPA.Grade9FinalGPA)
-    const result = parseFloat(Grade9FinalGPA.Grade9FinalGPA);
+const LineProg = (finalAvarage) => {
+    const result = finalAvarage.finalAvarage
 
   return (
     <div className="pt-8  md:pt-24">
       <ProgressBar
         height="30px"
         transitionDuration="2s"
-        animateOnRender="true"
+        animateOnRender= {true}
         borderRadius="5px"
         labelColor="#ED692A"
         bgColor="#ED692A"
