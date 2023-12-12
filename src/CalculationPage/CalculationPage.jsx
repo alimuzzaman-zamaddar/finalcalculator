@@ -7,6 +7,8 @@ import ShowResult from "../ShowResult/ShowResult";
 
 import { Accordion } from "flowbite-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const CalculationPage = () => {
   const handleCourseInput = (event) => {
@@ -358,8 +360,8 @@ const CalculationPage = () => {
         if (data.insertedId) {
           Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
           console.log(data.insertedId);
-            window.location.href = `/ShowResult/${data.insertedId}`;
-            <ShowResult id={data.insertedId}></ShowResult>;
+            window.location.href = `/courses/${data.insertedId}`;
+          <Link to="/courses/:id"> <ShowResult id={data.insertedId}></ShowResult></Link>
         }
       });
 

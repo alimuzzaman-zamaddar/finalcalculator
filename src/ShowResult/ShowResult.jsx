@@ -1,3 +1,4 @@
+
 import "./ShereResult";
 
 import { useLoaderData } from "react-router-dom"; // Import useParams from react-router-dom
@@ -6,8 +7,14 @@ import LineProg from "../LineProg/LineProg";
 import CircularProgress from "../CircularProgress/CircularProgress";
 import Swal from "sweetalert2";
 
+
 const ShowResult = () => {
   //   const { id } = useParams(); // Get the insertedId from route params
+
+
+
+
+
   const selectedCourse = useLoaderData();
 
   const {

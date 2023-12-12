@@ -4,6 +4,7 @@ import {
 import Home from "../Home/Home";
 
 import ShowResult from "../ShowResult/ShowResult";
+import Main from "../Main/Main";
 
 
 
@@ -12,15 +13,33 @@ import ShowResult from "../ShowResult/ShowResult";
 const Router = createBrowserRouter([
     {
       path: "/",
-      element:   <Home></Home> ,
+      element:   <Main></Main> ,
+      
+    children:[
+      {
+        path: "/",
+        element:   <Home></Home> ,
+  
+      },
+  
+      {
+        path: "courses",
+        element:   <ShowResult></ShowResult> ,
+  
+      },
+      {
+        path: "courses/:id",
+        element:   <ShowResult></ShowResult> ,
+        loader:  ({params}) => fetch(`https://gpacalulatorserver.vercel.app/courses/${params.id}`),
+      },
+
+    ]
     },
-    {
-      path: "/ShowResult/:id",
-      element:   <ShowResult></ShowResult> ,
-      loader:  ({params}) => fetch(`https://gpacalulatorserver.vercel.app/courses/${params.id}`),
-    },
-   
+  
 
 ]);
+
+
+
 
 export default Router;
