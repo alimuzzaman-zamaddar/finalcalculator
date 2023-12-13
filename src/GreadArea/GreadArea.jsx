@@ -346,7 +346,7 @@ const GreadArea = (selectedCourse) => {
     <>
       <div className="flex flex-wrap gread-area-border ">
         <div className="md:w-1/4 sm:w-1/2 w-full ">
-          <div className="  bgorange pt-3 pb-3">
+          <div className=" grade9-border-redious bgorange pt-3 pb-3">
             <h1 className="text-center">Grade 9 </h1>
           </div>
 
@@ -473,7 +473,7 @@ const GreadArea = (selectedCourse) => {
  
 
         <div className="md:w-1/4 sm:w-1/2 w-full">
-          <div className=" bgorange pt-3 pb-3">
+          <div className=" bgorange  pt-3 pb-3">
             <h1 className="text-center">Grade 10 </h1>
           </div>
 
@@ -720,7 +720,7 @@ const GreadArea = (selectedCourse) => {
         </div>
 
         <div className="md:w-1/4 sm:w-1/2 w-full">
-          <div className=" bgorange pt-3 pb-3">
+          <div className=" bgorange grade12-border-redious pt-3 pb-3 ">
             <h1 className="text-center">Grade 12 </h1>
           </div>
 

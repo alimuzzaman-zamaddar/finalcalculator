@@ -14,29 +14,26 @@ button.active {
     color: #ED692A;
     font-size: 32px;
 }
-button#\:r1\:-tab-1 {
-    font-size: 32px;
-
+button{
+    font-size: 32px !important;
+    font-weight: 600 !important;
 }
-button#\:r1\:-tab-2 {
-    font-size: 32px;
-  
+button.flex.w-full.items-center.justify-between.first\:rounded-t-lg.last\:rounded-b-lg.py-5.px-5.text-left.font-medium.hover\:bg-gray-100.focus\:ring-4.focus\:ring-gray-200.dark\:hover\:bg-gray-800.dark\:focus\:ring-gray-800.text-gray-900.bg-gray-100.dark\:bg-gray-800.dark\:text-white {
+    font-size: 18px !important;
 }
-button#\:r1\:-tab-3 {
-    font-size: 32px;
+.border {
 
+    border: none;
 }
 .first\:ml-0:first-child {
     margin-left: 0px;
-    font-size: 32px;
+    font-size: 32px !important;
     
 }
 
 .box-shadow-class{
     border-radius: 16px;
     background: #FFF;
-    
-    /* shadow */
     box-shadow: 0px 4px 8px 0px rgba(24, 39, 75, 0.06), 0px -4px 8px 0px rgba(24, 39, 75, 0.06);
     margin-bottom: 100px;
 }
@@ -109,5 +106,34 @@ button:focus{
         display: flex;
         margin: 0 auto;
     }
+    button.flex.w-full.items-center.justify-between.first\:rounded-t-lg.last\:rounded-b-lg.py-5.px-5.text-left.font-medium.hover\:bg-gray-100.focus\:ring-4.focus\:ring-gray-200.dark\:hover\:bg-gray-800.dark\:focus\:ring-gray-800.text-gray-900.bg-gray-100.dark\:bg-gray-800.dark\:text-white {
+        font-size: 18px !important;
+    }
 
   }
+
+
+
+/* share result button */
+
+  button.text-center.px-6.py-4.rounded-lg.cursor-pointer.hover\:bg-\[\#0b111c\].duration-500.bg-\[\#21498B\].text-white {
+    color: #FFF;
+    font-family: Lato;
+    font-size: 18px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+}
+
+button.flex.w-full.items-center.justify-between.first\:rounded-t-lg.last\:rounded-b-lg.py-5.px-5.text-left.font-medium.text-gray-500.dark\:text-gray-400.hover\:bg-gray-100.focus\:ring-4.focus\:ring-gray-200.dark\:hover\:bg-gray-800.dark\:focus\:ring-gray-800 {
+    font-size: 18px !important;
+}
+
+
+body,p.span,h5,h6,a{
+    font-family: 'Lato', sans-serif;
+}
+h1,h2,h3,h4{
+    font-family: 'Hind', sans-serif;
+
+}

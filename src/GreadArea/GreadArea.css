@@ -104,6 +104,13 @@
   .value-container {
     transform: rotate(136deg);
   }
+
+  .grade9-border-redious{
+    border-radius: 8px 0px 0px 0px;
+  }
+  .grade12-border-redious{
+    border-radius: 0px 8px 0px 0px;
+  }
   
   .bgpic{
     background-image: url(../src/assets/GRADESCALE.png);

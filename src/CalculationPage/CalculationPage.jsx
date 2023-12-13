@@ -2,9 +2,7 @@ import { Tabs } from "flowbite-react";
 import "./CalculationPage.css";
 import Swal from "sweetalert2";
 import ShowResult from "../ShowResult/ShowResult";
-
 ("use client");
-
 import { Accordion } from "flowbite-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -403,7 +401,7 @@ const CalculationPage = () => {
         onSubmit={handleCourseInput}
       >
         <Tabs style="underline">
-          <Tabs.Item ring-0 active title="Grade 9">
+          <Tabs.Item ring-0 active title="Grade - 9">
             <div className="md:md:flex  justify-between md:gap-8">
               <div className="md:md:w-1/4  ">
                 <input
@@ -423,7 +421,7 @@ const CalculationPage = () => {
                   required
                 >
                   <option value="">Select Subject</option>
-                  <option value="English">English</option>
+                  <option className="hover:bg-slate-600" value="English">English</option>
                   <option value="Math">Math</option>
                   <option value="Science">Science</option>
                   <option value="Language">Language</option>
@@ -435,6 +433,7 @@ const CalculationPage = () => {
                   name="g9c1grade1"
                   id="g9c1grade1"
                   required
+                 
                 >
                   <option value="">Course Grade</option>
                   <option value="4">A (90-100)%</option>
@@ -944,7 +943,7 @@ const CalculationPage = () => {
               </div>
             </div>
           </Tabs.Item>
-          <Tabs.Item title="Grade 10">
+          <Tabs.Item title="Grade - 10">
             <div className="md:md:flex justify-between gap-8 ">
               <div className="md:md:w-1/4">
                 <input
@@ -1486,7 +1485,7 @@ const CalculationPage = () => {
               </div>
             </div>
           </Tabs.Item>
-          <Tabs.Item title="Grade 11">
+          <Tabs.Item title="Grade - 11">
             <div className="md:md:flex justify-between gap-8 ">
               <div className="md:md:w-1/4">
                 <input
@@ -2028,7 +2027,7 @@ const CalculationPage = () => {
               </div>
             </div>
           </Tabs.Item>
-          <Tabs.Item title="Grade 12">
+          <Tabs.Item title="Grade - 12">
             <div className="md:flex justify-between gap-8 ">
               <div className="md:w-1/4">
                 <input

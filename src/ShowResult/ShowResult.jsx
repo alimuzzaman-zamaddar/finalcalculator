@@ -1,6 +1,9 @@
 
 import "./ShereResult";
 
+
+import MyBackgroundImage from "../assets/GRADESCALE.png"
+
 import { useLoaderData } from "react-router-dom"; // Import useParams from react-router-dom
 import GreadArea from "../GreadArea/GreadArea";
 import LineProg from "../LineProg/LineProg";
@@ -342,7 +345,11 @@ const ShowResult = () => {
         <section className=" ">
           <section className="w-full flex justify-center md:mb-11 mb-6 ">
             <section className=" w-full grid-cols-1 items-center ">
-              <section className="hg bgpic ">
+              <section     style={{
+        backgroundImage: `url(${MyBackgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+      }}className="hg ">
                 <LineProg finalAvarage={finalAvarage}></LineProg>
               </section>
             </section>
