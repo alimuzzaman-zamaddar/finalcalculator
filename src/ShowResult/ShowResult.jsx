@@ -367,7 +367,7 @@ const ShowResult = () => {
         </section>
 
         <div className="text-center mt-16">
-          <button onClick={copyURLToClipboard} className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#0b111c] duration-500  bg-[#21498B] text-white">Share Result
+          <button onClick={copyURLToClipboard} className="text-center text-xl  px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#ED692A] duration-500  bg-[#21498B] text-white">Share Result
           </button>
         </div>
       </section>

@@ -40,7 +40,7 @@ const CircularProgress = (finalAvarage) => {
   }, [finalAvarage]); 
 
   return (
-    <div>
+    <div className="relative">
       <div className="progress-area flex items-center justify-center  ml-5 ">
         <div className="circular-progress" ref={progressBarRef}>
           <div className="value-container" ref={valueContainerRef}>
