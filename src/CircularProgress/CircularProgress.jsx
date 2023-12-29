@@ -1,14 +1,14 @@
 import  { useEffect, useRef } from "react";
 import "./CircularProgress.css";
 
-const CircularProgress = (finalAvarage) => {
+const CircularProgress = (grandFinalResult) => {
   const progressBarRef = useRef(null);
   const valueContainerRef = useRef(null);
 
   useEffect(() => {
 
 
-    const resultRound = parseFloat(finalAvarage.finalAvarage);
+    const resultRound = parseFloat(grandFinalResult.grandFinalResult);
     const progressBar = progressBarRef.current;
     const valueContainer = valueContainerRef.current;
 
@@ -37,7 +37,7 @@ const CircularProgress = (finalAvarage) => {
     }, speed);
 
     return () => clearInterval(progress);
-  }, [finalAvarage]); 
+  }, [grandFinalResult]); 
 
   return (
     <div className="relative">

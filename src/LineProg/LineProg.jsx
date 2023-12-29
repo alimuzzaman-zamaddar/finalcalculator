@@ -1,10 +1,8 @@
 import ProgressBar from "@ramonak/react-progress-bar"
 import "./LineProg.css";
 
-
-
-const LineProg = (finalAvarage) => {
-    const result = finalAvarage.finalAvarage
+const LineProg = (grandFinalResult) => {
+    const result = grandFinalResult.grandFinalResult
 
   return (
     <div className="pt-8  md:pt-24">

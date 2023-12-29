@@ -113,10 +113,9 @@
   }
   
   .bgpic{
-    background-image: url(../src/assets/GRADESCALE.png);
+    background-image: url(../assets/lineprog.png);
     background-repeat: no-repeat;
     background-size: cover;
-   
     width: auto;
   }
   
