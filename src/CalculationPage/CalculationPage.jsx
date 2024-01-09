@@ -221,260 +221,64 @@ const CalculationPage = () => {
       });
     }
   };
-  // goup 9 handle submit form //
-  const handleFormSubmitG9 = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const satscore = e.target.satScore.value;
     const formInputs = e.target.elements;
-    const courses = [];
-
-    // Collect form data
-    for (let i = 1; i <= 10; i++) {
-      const courseInput = formInputs[`g9c${i}course${i}`]?.value.trim();
-      const subjectInput = formInputs[`g9c${i}subject${i}`]?.value.trim();
-      const gradeInput = formInputs[`g9c${i}grade${i}`]?.value.trim();
-      const creditInput = formInputs[`g9c${i}cradit${i}`]?.value.trim();
-
-      if (courseInput || subjectInput || gradeInput || creditInput) {
-        courses.push({
-          course: courseInput,
-          subject: subjectInput,
-          grade: gradeInput,
-          credit: creditInput,
-        });
+    const satscore = formInputs.satScore.value;
+    const allData = {};
+  
+    for (let grade = 9; grade <= 12; grade++) {
+      const courses = [];
+  
+      for (let i = 1; i <= 10; i++) {
+        const courseInput = formInputs[`g${grade}c${i}course${i}`]?.value.trim();
+        const subjectInput = formInputs[`g${grade}c${i}subject${i}`]?.value.trim();
+        const gradeInput = formInputs[`g${grade}c${i}grade${i}`]?.value.trim();
+        const creditInput = formInputs[`g${grade}c${i}cradit${i}`]?.value.trim();
+  
+        if (courseInput || subjectInput || gradeInput || creditInput) {
+          const courseData = {
+            [`course${grade}`]: courseInput,
+            [`subject${grade}`]: subjectInput,
+            [`grade${grade}`]: gradeInput,
+            [`credit${grade}`]: creditInput,
+          };
+  
+          // Add courseData to courses if any field has a value
+          if (Object.values(courseData).some((value) => value !== '')) {
+            courses.push(courseData);
+          }
+        }
+      }
+  
+      if (courses.length > 0) {
+        allData[`formDataG${grade}`] = courses;
       }
     }
-
-    // Check if there are courses to submit
-    if (courses.length === 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill in at least one course.",
-      });
-      return; // Exit the function if there are no courses
-    }
-
-    // Prepare data for submission
-    const alldata = { formDataG9: courses, satscore };
-
+  
     try {
-      const response = await fetch(
-        "https://gpacalulatorserver.vercel.app/courses",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(alldata),
-        }
-      );
-
+      const response = await fetch('https://gpacalulatorserver.vercel.app/courses', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ allData, satscore }),
+      });
+  
       const data = await response.json();
-
+  
       if (data.insertedId) {
-        Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
-        // Redirect to the ShowResult component with the insertedId
+        Swal.fire('SUCCESS', 'Your GPA is Calculating', 'success');
         window.location.href = `/courses/${data.insertedId}`;
       } else {
-        Swal.fire("ERROR", "Failed to retrieve ID", "error");
+        Swal.fire('ERROR', 'Failed to retrieve ID', 'error');
       }
     } catch (error) {
-      console.error("Error:", error);
-      Swal.fire("ERROR", "Failed to fetch data", "error");
+      console.error('Error:', error);
+      Swal.fire('ERROR', 'Failed to fetch data', 'error');
     }
   };
-
-  // goup 10 handle submit form //
-  const handleFormSubmitG10 = async (e) => {
-    e.preventDefault();
-    const satscore = e.target.satScore.value;
-    const formInputs = e.target.elements;
-    const courses = [];
-
-    // Collect form data
-    for (let i = 1; i <= 10; i++) {
-      const courseInput = formInputs[`g10c${i}course${i}`]?.value.trim();
-      const subjectInput = formInputs[`g10c${i}subject${i}`]?.value.trim();
-      const gradeInput = formInputs[`g10c${i}grade${i}`]?.value.trim();
-      const creditInput = formInputs[`g10c${i}cradit${i}`]?.value.trim();
-
-      if (courseInput || subjectInput || gradeInput || creditInput) {
-        courses.push({
-          course10: courseInput,
-          subject10: subjectInput,
-          grade10: gradeInput,
-          credit10: creditInput,
-        });
-      }
-    }
-
-    // Check if there are courses to submit
-    if (courses.length === 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill in at least one course.",
-      });
-      return; // Exit the function if there are no courses
-    }
-
-    // Prepare data for submission
-    const alldata = { formDataG10: courses, satscore };
-
-    try {
-      const response = await fetch(
-        "https://gpacalulatorserver.vercel.app/courses",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(alldata),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.insertedId) {
-        Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
-        // Redirect to the ShowResult component with the insertedId
-        window.location.href = `/courses/${data.insertedId}`;
-      } else {
-        Swal.fire("ERROR", "Failed to retrieve ID", "error");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      Swal.fire("ERROR", "Failed to fetch data", "error");
-    }
-  };
-  // goup 11 handle submit form //
-  const handleFormSubmitG11 = async (e) => {
-    e.preventDefault();
-    const satscore = e.target.satScore.value;
-    const formInputs = e.target.elements;
-    const courses = [];
-
-    // Collect form data
-    for (let i = 1; i <= 10; i++) {
-      const courseInput = formInputs[`g11c${i}course${i}`]?.value.trim();
-      const subjectInput = formInputs[`g11c${i}subject${i}`]?.value.trim();
-      const gradeInput = formInputs[`g11c${i}grade${i}`]?.value.trim();
-      const creditInput = formInputs[`g11c${i}cradit${i}`]?.value.trim();
-
-      if (courseInput || subjectInput || gradeInput || creditInput) {
-        courses.push({
-          course11: courseInput,
-          subject11: subjectInput,
-          grade11: gradeInput,
-          credit11: creditInput,
-        });
-      }
-    }
-
-    // Check if there are courses to submit
-    if (courses.length === 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill in at least one course.",
-      });
-      return; // Exit the function if there are no courses
-    }
-
-    // Prepare data for submission
-    const alldata = { formDataG11: courses, satscore };
-
-    try {
-      const response = await fetch(
-        "https://gpacalulatorserver.vercel.app/courses",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(alldata),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.insertedId) {
-        Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
-        // Redirect to the ShowResult component with the insertedId
-        window.location.href = `/courses/${data.insertedId}`;
-      } else {
-        Swal.fire("ERROR", "Failed to retrieve ID", "error");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      Swal.fire("ERROR", "Failed to fetch data", "error");
-    }
-  };
-
-  // goup 12 handle submit form //
-  const handleFormSubmitG12 = async (e) => {
-    e.preventDefault();
-    const satscore = e.target.satScore.value;
-    const formInputs = e.target.elements;
-    const courses = [];
-
-    // Collect form data
-    for (let i = 1; i <= 10; i++) {
-      const courseInput = formInputs[`g12c${i}course${i}`]?.value.trim();
-      const subjectInput = formInputs[`g12c${i}subject${i}`]?.value.trim();
-      const gradeInput = formInputs[`g12c${i}grade${i}`]?.value.trim();
-      const creditInput = formInputs[`g12c${i}cradit${i}`]?.value.trim();
-
-      if (courseInput || subjectInput || gradeInput || creditInput) {
-        courses.push({
-          course12: courseInput,
-          subject12: subjectInput,
-          grade12: gradeInput,
-          credit12: creditInput,
-        });
-      }
-    }
-
-    // Check if there are courses to submit
-    if (courses.length === 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Please fill in at least one course.",
-      });
-      return; // Exit the function if there are no courses
-    }
-
-    // Prepare data for submission
-    const alldata = { formDataG12: courses, satscore };
-
-    try {
-      const response = await fetch(
-        "https://gpacalulatorserver.vercel.app/courses",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(alldata),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.insertedId) {
-        Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
-        // Redirect to the ShowResult component with the insertedId
-        window.location.href = `/courses/${data.insertedId}`;
-      } else {
-        Swal.fire("ERROR", "Failed to retrieve ID", "error");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      Swal.fire("ERROR", "Failed to fetch data", "error");
-    }
-  };
+  
 
   const [satCompleted, setSatCompleted] = useState("");
 
@@ -534,9 +338,10 @@ const CalculationPage = () => {
         </Accordion>
       </div>
       <div className="md:px-[87px] md:py-[90px] px-[20px] py-[20px]  box-shadow-class">
+      <form onSubmit={handleFormSubmit}>
         <Tabs style="underline">
           <Tabs.Item ring-0 active title="Grade - 9">
-            <form onSubmit={handleFormSubmitG9}>
+
               <div className="md:md:flex  justify-between md:gap-8">
                 <div className="md:w-1/4 relative  ">
                   <input
@@ -1219,58 +1024,8 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="mt-8 clc-radio-wrap">
-                <div className="md:flex items-center gap-3 text-xl">
-                  <label className="mr-5">Have you completed the SAT?</label>
-                  <div className="mr-5">
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="yes"
-                      name="satCompleted"
-                      value="yes"
-                      checked={satCompleted === "yes"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="yes">Yes</label>
-                  </div>
-                  <div>
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="no"
-                      name="satCompleted"
-                      value="no"
-                      checked={satCompleted === "no"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="no">No</label>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <input
-                    className="py-3 px-[18px] bg-[#FFF] border-[1px] border-[#E9EDF3] rounded-lg"
-                    type="text"
-                    id="satScore"
-                    placeholder="Type your SAT score"
-                    disabled={satCompleted !== "yes"} // Disable input if satCompleted is not 'yes'
-                  />
-                </div>
-              </div>
-
-              <div className="text-center mt-16">
-                <input
-                  type="submit"
-                  className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#ED692A] duration-500  bg-[#21498B] text-white"
-                  value="Start GPA Calculation"
-                />
-              </div>
-            </form>
           </Tabs.Item>
           <Tabs.Item title="Grade - 10">
-            <form onSubmit={handleFormSubmitG10}>
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
@@ -1866,22 +1621,17 @@ const CalculationPage = () => {
                   </div>
                 </div>
                 <div className="md:w-1/4 relative">
-                  <select
+                <select
                     className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
-                    name="g10c9cradit9"
-                    id="g10c9cradit9"
+                    name="g10c8cradit8"
+                    id="g10c8cradit8"
                     required={requiredFields.g10c9cradit9}
                   >
-                    <option value="">Select Subject</option>
-                    <option value="English">English</option>
-                    <option value="Math">Math (Algebra I or higher)</option>
-                    <option value="Science">Science</option>
-                    <option value="Language">Language</option>
-                    <option value="Social">Social</option>
-                    <option value="Comparative ">Comparative</option>
-                    <option value="Religion or Philosophy ">
-                      Religion or Philosophy
-                    </option>
+                    <option value="">Unit of Credit</option>
+                    <option value="0.25">1 quarter unit = 0.25</option>
+                    <option value="0.34">1 trimester unit = 0.34</option>
+                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
                     <FaAngleDown className="text-[#1D2939]" />
@@ -1956,57 +1706,8 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 clc-radio-wrap">
-                <div className="md:flex items-center gap-3 text-xl">
-                  <label className="mr-5">Have you completed the SAT?</label>
-                  <div className="mr-5">
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="yes"
-                      name="satCompleted"
-                      value="yes"
-                      checked={satCompleted === "yes"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="yes">Yes</label>
-                  </div>
-                  <div>
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="no"
-                      name="satCompleted"
-                      value="no"
-                      checked={satCompleted === "no"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="no">No</label>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <input
-                    className="py-3 px-[18px] bg-[#FFF] border-[1px] border-[#E9EDF3] rounded-lg"
-                    type="text"
-                    id="satScore"
-                    placeholder="Type your SAT score"
-                    disabled={satCompleted !== "yes"} // Disable input if satCompleted is not 'yes'
-                  />
-                </div>
-              </div>
-
-              <div className="text-center mt-16">
-                <input
-                  type="submit"
-                  className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#ED692A] duration-500  bg-[#21498B] text-white"
-                  value="Start GPA Calculation"
-                />
-              </div>
-            </form>
           </Tabs.Item>
           <Tabs.Item title="Grade - 11">
-            <form onSubmit={handleFormSubmitG11}>
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
@@ -2687,57 +2388,8 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 clc-radio-wrap">
-                <div className="md:flex items-center gap-3 text-xl">
-                  <label className="mr-5">Have you completed the SAT?</label>
-                  <div className="mr-5">
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="yes"
-                      name="satCompleted"
-                      value="yes"
-                      checked={satCompleted === "yes"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="yes">Yes</label>
-                  </div>
-                  <div>
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="no"
-                      name="satCompleted"
-                      value="no"
-                      checked={satCompleted === "no"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="no">No</label>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <input
-                    className="py-3 px-[18px] bg-[#FFF] border-[1px] border-[#E9EDF3] rounded-lg"
-                    type="text"
-                    id="satScore"
-                    placeholder="Type your SAT score"
-                    disabled={satCompleted !== "yes"} // Disable input if satCompleted is not 'yes'
-                  />
-                </div>
-              </div>
-
-              <div className="text-center mt-16">
-                <input
-                  type="submit"
-                  className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#ED692A] duration-500  bg-[#21498B] text-white"
-                  value="Start GPA Calculation"
-                />
-              </div>
-            </form>
           </Tabs.Item>
           <Tabs.Item title="Grade - 12">
-            <form onSubmit={handleFormSubmitG12}>
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
@@ -2999,7 +2651,7 @@ const CalculationPage = () => {
                     id="g12c4cradit4"
                     required={requiredFields.g12c4cradit4}
                   >
-                    <option>Unit of Credit</option>
+                    <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
                     <option value="0.50">1 semesterr unit = 0.50</option>
@@ -3418,7 +3070,9 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 clc-radio-wrap">
+          </Tabs.Item>
+        </Tabs>
+        <div className="mt-8 clc-radio-wrap">
                 <div className="md:flex items-center gap-3 text-xl">
                   <label className="mr-5">Have you completed the SAT?</label>
                   <div className="mr-5">
@@ -3465,9 +3119,7 @@ const CalculationPage = () => {
                   value="Start GPA Calculation"
                 />
               </div>
-            </form>
-          </Tabs.Item>
-        </Tabs>
+        </form>
       </div>
     </div>
   );

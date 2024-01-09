@@ -9,58 +9,120 @@ import CircularProgress from "../CircularProgress/CircularProgress";
 import Swal from "sweetalert2";
 
 const ShowResult = () => {
-  const selectedCourse = useLoaderData();
+  const  selectedCourse =useLoaderData();
 
-  const selectedCourses =
-    selectedCourse.formDataG9 ||
-    selectedCourse.formDataG10 ||
-    selectedCourse.formDataG11 ||
-    selectedCourse.formDataG12;
-  console.log(selectedCourses);
-  const satScore = selectedCourse.satscore;
-  console.log(satScore);
-
-  const calculateGradeCreditProduct = (data) => {
-    let totalGradeCreditProduct = 0;
-    let totalCredits = 0;
+  const calculateGPA = (selectedCourse) => {
+    const { formDataG9, formDataG10, formDataG11, formDataG12 } = selectedCourse.allData;
   
-    for (let i = 0; i < data.length; i++) {
-      const { grade, credit, grade10, credit10, grade11, credit11, grade12, credit12 } = data[i];
+    const allData = [formDataG9, formDataG10, formDataG11, formDataG12];
+    const allData3 = [formDataG9, formDataG10, formDataG11];
+    const allData2 = [formDataG9, formDataG10];
+    const allData9 = [formDataG9];
+    const allData10 = [formDataG10];
+    const allData11 = [formDataG11];
+    const allData12 = [formDataG12];
+    const satScore = selectedCourse.satscore;
   
-      let gradeValue, creditValue;
+    const calculateGradeCreditProduct = (data) => {
+      let totalGradeCreditProduct = 0;
+      let totalCredits = 0;
   
-      if (grade && credit) {
-        gradeValue = parseFloat(grade);
-        creditValue = parseFloat(credit);
-      } else if (grade10 && credit10) {
-        gradeValue = parseFloat(grade10);
-        creditValue = parseFloat(credit10);
-      } else if (grade11 && credit11) {
-        gradeValue = parseFloat(grade11);
-        creditValue = parseFloat(credit11);
-      } else if (grade12 && credit12) {
-        gradeValue = parseFloat(grade12);
-        creditValue = parseFloat(credit12);
+      for (let i = 0; i < data.length; i++) {
+        const { grade9, credit9, grade10, credit10, grade11, credit11, grade12, credit12 } = data[i];
+  
+        let gradeValue, creditValue;
+  
+        if (grade9 && credit9) {
+          gradeValue = parseFloat(grade9);
+          creditValue = parseFloat(credit9);
+        } else if (grade10 && credit10) {
+          gradeValue = parseFloat(grade10);
+          creditValue = parseFloat(credit10);
+        } else if (grade11 && credit11) {
+          gradeValue = parseFloat(grade11);
+          creditValue = parseFloat(credit11);
+        } else if (grade12 && credit12) {
+          gradeValue = parseFloat(grade12);
+          creditValue = parseFloat(credit12);
+        }
+  
+        if (!isNaN(gradeValue) && !isNaN(creditValue)) {
+          totalGradeCreditProduct += gradeValue * creditValue;
+          totalCredits += creditValue;
+        }
       }
   
-      if (!isNaN(gradeValue) && !isNaN(creditValue)) {
-        totalGradeCreditProduct += gradeValue * creditValue;
-        totalCredits += creditValue;
-      }
+      const grandTotalGPA = totalCredits !== 0 ? totalGradeCreditProduct / totalCredits : 0;
+      return grandTotalGPA;
+    };
+  
+    const selectedCourses =
+      formDataG9 || formDataG10 || formDataG11 || formDataG12;
+  
+    const finalGPA = calculateGradeCreditProduct(selectedCourses);
+    const grandFinalResult = finalGPA.toFixed(2);
+  
+    if (formDataG9 && formDataG10 && formDataG11 && formDataG12) {
+      const GPAs = allData.map((formData) => calculateGradeCreditProduct(formData));
+  
+      return {
+        grade9result: GPAs[0].toFixed(2),
+        grade10result: GPAs[1].toFixed(2),
+        grade11result: GPAs[2].toFixed(2),
+        grade12result: GPAs[3].toFixed(2),
+        satScore,
+        grandFinalResult
+      };
+    } else if(formDataG9 && formDataG10 && formDataG11) {
+      const GPAs = allData3.map((formData) => calculateGradeCreditProduct(formData));
+      return {
+        grade9result: GPAs[0].toFixed(2),
+        grade10result: GPAs[1].toFixed(2),
+        grade11result: GPAs[2].toFixed(2),
+        satScore,
+      };
+    }else if(formDataG9 && formDataG10 ){
+      const GPAs = allData2.map((formData) => calculateGradeCreditProduct(formData));
+      return {
+        grade9result: GPAs[0].toFixed(2),
+        grade10result: GPAs[1].toFixed(2),
+        satScore,
+      };
+    }else if(formDataG9){
+      const GPAs = allData9.map((formData) => calculateGradeCreditProduct(formData));
+      return {
+        grade9result: GPAs[0].toFixed(2),
+        satScore,
+      };
+    }else if (formDataG10){
+      const GPAs = allData10.map((formData) => calculateGradeCreditProduct(formData));
+      return {
+        grade10result: GPAs[0].toFixed(2),
+        satScore,
+      };
+    }else if(formDataG11){
+      const GPAs = allData11.map((formData) => calculateGradeCreditProduct(formData));
+      return {
+        grade11result: GPAs[0].toFixed(2),
+        satScore,
+      };
+    }else if(formDataG12){
+      const GPAs = allData12.map((formData) => calculateGradeCreditProduct(formData));
+      return {
+        grade12result: GPAs[0].toFixed(2),
+        satScore,
+      };
     }
-  
-    const grandTotalGPA = totalCredits !== 0 ? totalGradeCreditProduct / totalCredits : 0;
-  
-    return grandTotalGPA;
+
   };
-  
+  const totalGPAforall = calculateGPA(selectedCourse);
+  console.log(totalGPAforall);
+ 
 
-  const totaGPA = calculateGradeCreditProduct(selectedCourses);
 
 
 
-  const grandFinalResult = totaGPA.toFixed(2);
-  console.log(grandFinalResult);
+
 
   const copyURLToClipboard = async () => {
     try {
@@ -82,14 +144,22 @@ const ShowResult = () => {
       <section className="gpa-sections max-w-7xl mx-auto mt-11 p-2  md:p-14">
         <section className="w-full flex justify-center  mb-12 ">
           <section className="progressbar-area grid-cols-1 items-center justify-center ">
-            {satScore ? (
-              <h1 className="pb-10  text-center">SAT Score : {satScore}</h1>
+            {totalGPAforall?.satScore ? (
+              <h1 className="pb-10  text-center">
+                SAT Score : {totalGPAforall.satScore}
+              </h1>
             ) : (
               " "
             )}
             <section className="progressbar  ">
               <CircularProgress
-                grandFinalResult={grandFinalResult}
+                grandFinalResult={
+                  totalGPAforall.grade9result ||
+                  totalGPAforall.grade10result ||
+                  totalGPAforall.grade11result ||
+                  totalGPAforall.grade12result ||
+                  ""
+                }
               ></CircularProgress>
             </section>
           </section>
@@ -107,16 +177,27 @@ const ShowResult = () => {
                 }}
                 className="hg"
               >
-                <LineProg grandFinalResult={grandFinalResult}></LineProg>
+                <LineProg
+                  grandFinalResult={
+                    totalGPAforall.grade9result ||
+                    totalGPAforall.grade10result ||
+                    totalGPAforall.grade11result ||
+                    totalGPAforall.grade12result ||
+                    ""
+                  }
+                ></LineProg>
               </section>
             </section>
           </section>
 
           <section className="border">
             <GreadArea
-              key={grandFinalResult}
-              grandFinalResult={grandFinalResult}
-              selectedCourses={selectedCourses}
+              key={totalGPAforall.grade9result} // Use a specific property for the key
+              grandFinalResult9={totalGPAforall.grade9result} // Pass a specific property
+              grandFinalResult10={totalGPAforall.grade10result} // Pass a specific property
+              grandFinalResult11={totalGPAforall.grade11result} // Pass a specific property
+              grandFinalResult12={totalGPAforall.grade12result} // Pass a specific property
+              selectedCourses={selectedCourse}
             ></GreadArea>
           </section>
         </section>
