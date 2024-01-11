@@ -130,7 +130,7 @@ const GreadArea = ({ selectedCourses, grandFinalResult9, grandFinalResult10, gra
               <h4 className="font-bold text-xl">GPA </h4>
             </div>
             <div className="w-1/4">
-              <h4 className="text-center">{grandFinalResult9 && formDataG9[0]?.grade9 ? grandFinalResult9 : "_____"}</h4>
+              <h4 className="text-center font-bold text-xl">{grandFinalResult9 && formDataG9[0]?.grade9 ? grandFinalResult9 : "_____"}</h4>
             </div>
           </div>
         </div>
@@ -255,7 +255,7 @@ const GreadArea = ({ selectedCourses, grandFinalResult9, grandFinalResult10, gra
               <h4 className="font-bold text-xl">GPA </h4>
             </div>
             <div className="w-1/4">
-              <h4 className="text-center">{grandFinalResult10 && formDataG10[0]?.grade10 ? grandFinalResult10 : "_____"}</h4>
+              <h4 className="text-center font-bold text-xl">{grandFinalResult10 && formDataG10[0]?.grade10 ? grandFinalResult10 : "_____"}</h4>
             </div>
           </div>
         </div>
@@ -378,7 +378,7 @@ const GreadArea = ({ selectedCourses, grandFinalResult9, grandFinalResult10, gra
               <h4 className="font-bold text-xl">GPA </h4>
             </div>
             <div className="w-1/4">
-              <h4 className="text-center">{grandFinalResult11 && formDataG11[0]?.grade11 ? grandFinalResult11 : "_____"}</h4>
+              <h4 className="text-center font-bold text-xl">{grandFinalResult11 && formDataG11[0]?.grade11 ? grandFinalResult11 : "_____"}</h4>
             </div>
           </div>
         </div>
@@ -482,7 +482,7 @@ const GreadArea = ({ selectedCourses, grandFinalResult9, grandFinalResult10, gra
               <h4 className="font-bold text-xl">GPA </h4>
             </div>
             <div className="w-1/4">
-              <h4 className="text-center">{grandFinalResult12 && formDataG12[0]?.grade12 ? grandFinalResult12 : "_____"}</h4>
+              <h4 className="text-center font-bold text-xl">{grandFinalResult12 && formDataG12[0]?.grade12 ? grandFinalResult12 : "_____"}</h4>
             </div>
           </div>
         </div>

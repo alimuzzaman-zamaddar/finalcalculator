@@ -5,8 +5,10 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { Accordion } from "flowbite-react";
+import { ScaleLoader } from 'react-spinners';
 
 const CalculationPage = () => {
+  const [loading, setLoading] = useState(false);
   const [requiredFields, setRequiredFields] = useState({
     g9c1subject1: false,
     g9c1grade1: false,
@@ -256,7 +258,14 @@ const CalculationPage = () => {
       }
     }
   
+    if (Object.keys(allData).length === 0) {
+      // Show an alert if allData is empty
+      Swal.fire('Ooops', 'Please Fillup The Form Before The Calculation', 'warning');
+      return;
+    }
+  
     try {
+      setLoading(true)
       const response = await fetch('https://gpacalulatorserver.vercel.app/courses', {
         method: 'POST',
         headers: {
@@ -276,8 +285,11 @@ const CalculationPage = () => {
     } catch (error) {
       console.error('Error:', error);
       Swal.fire('ERROR', 'Failed to fetch data', 'error');
+    }finally{
+      setLoading(false)
     }
   };
+  
   
 
   const [satCompleted, setSatCompleted] = useState("");
@@ -286,7 +298,7 @@ const CalculationPage = () => {
     setSatCompleted(e.target.value);
   };
   return (
-    <div className="md:w-[1140px] p-5 mx-auto pt-16">
+    <div className="md:w-[1140px] p-5 mx-auto">
       <div className="my-24 relative">
         <Accordion collapseAll>
           <Accordion.Panel>
@@ -338,6 +350,7 @@ const CalculationPage = () => {
         </Accordion>
       </div>
       <div className="md:px-[87px] md:py-[90px] px-[20px] py-[20px]  box-shadow-class">
+      {loading && <ScaleLoader color="#36d7b7" />}
       <form onSubmit={handleFormSubmit}>
         <Tabs style="underline">
           <Tabs.Item ring-0 active title="Grade - 9">

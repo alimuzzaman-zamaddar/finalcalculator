@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@alptugidin/react-circular-progress-bar": "^1.1.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@ramonak/react-progress-bar": "^5.1.1",
@@ -26,6 +29,7 @@
     "react-hook-form": "^7.48.2",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.20.1",
+    "react-spinners": "^0.13.8",
     "react-tabs": "^6.0.2",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.10.1"
