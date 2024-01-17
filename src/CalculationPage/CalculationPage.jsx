@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { Accordion } from "flowbite-react";
-import { ScaleLoader } from 'react-spinners';
+import { ScaleLoader } from "react-spinners";
 
 const CalculationPage = () => {
   const [loading, setLoading] = useState(false);
@@ -228,16 +228,19 @@ const CalculationPage = () => {
     const formInputs = e.target.elements;
     const satscore = formInputs.satScore.value;
     const allData = {};
-  
+
     for (let grade = 9; grade <= 12; grade++) {
       const courses = [];
-  
+
       for (let i = 1; i <= 10; i++) {
-        const courseInput = formInputs[`g${grade}c${i}course${i}`]?.value.trim();
-        const subjectInput = formInputs[`g${grade}c${i}subject${i}`]?.value.trim();
+        const courseInput =
+          formInputs[`g${grade}c${i}course${i}`]?.value.trim();
+        const subjectInput =
+          formInputs[`g${grade}c${i}subject${i}`]?.value.trim();
         const gradeInput = formInputs[`g${grade}c${i}grade${i}`]?.value.trim();
-        const creditInput = formInputs[`g${grade}c${i}cradit${i}`]?.value.trim();
-  
+        const creditInput =
+          formInputs[`g${grade}c${i}cradit${i}`]?.value.trim();
+
         if (courseInput || subjectInput || gradeInput || creditInput) {
           const courseData = {
             [`course${grade}`]: courseInput,
@@ -245,52 +248,57 @@ const CalculationPage = () => {
             [`grade${grade}`]: gradeInput,
             [`credit${grade}`]: creditInput,
           };
-  
+
           // Add courseData to courses if any field has a value
-          if (Object.values(courseData).some((value) => value !== '')) {
+          if (Object.values(courseData).some((value) => value !== "")) {
             courses.push(courseData);
           }
         }
       }
-  
+
       if (courses.length > 0) {
         allData[`formDataG${grade}`] = courses;
       }
     }
-  
+
     if (Object.keys(allData).length === 0) {
       // Show an alert if allData is empty
-      Swal.fire('Ooops', 'Please Fillup The Form Before The Calculation', 'warning');
+      Swal.fire(
+        "Ooops",
+        "Please Fillup The Form Before The Calculation",
+        "warning"
+      );
       return;
     }
-  
+
     try {
-      setLoading(true)
-      const response = await fetch('https://gpacalulatorserver.vercel.app/courses', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ allData, satscore }),
-      });
-  
+      setLoading(true);
+      const response = await fetch(
+        "https://gpacalulatorserver.vercel.app/courses",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ allData, satscore }),
+        }
+      );
+
       const data = await response.json();
-  
+
       if (data.insertedId) {
-        Swal.fire('SUCCESS', 'Your GPA is Calculating', 'success');
+        Swal.fire("SUCCESS", "Your GPA is Calculating", "success");
         window.location.href = `/courses/${data.insertedId}`;
       } else {
-        Swal.fire('ERROR', 'Failed to retrieve ID', 'error');
+        Swal.fire("ERROR", "Failed to retrieve ID", "error");
       }
     } catch (error) {
-      console.error('Error:', error);
-      Swal.fire('ERROR', 'Failed to fetch data', 'error');
-    }finally{
-      setLoading(false)
+      console.error("Error:", error);
+      Swal.fire("ERROR", "Failed to fetch data", "error");
+    } finally {
+      setLoading(false);
     }
   };
-  
-  
 
   const [satCompleted, setSatCompleted] = useState("");
 
@@ -304,45 +312,44 @@ const CalculationPage = () => {
           <Accordion.Panel>
             <Accordion.Title>What is a Core Course?</Accordion.Title>
             <Accordion.Content>
-              <div className="">
-                <h3 className="font-bold">
-                  An NCAA-approved core course must meet the following
-                  requirements :
-                </h3>
-                <p className="font-bold mb-6">
-                  Is a four-year college preparatory course in one or these
-                  subject areas :
+              <div className="px-9 pb-9">
+                <h3 className="font-bold">NCAA-Approved Core Courses :</h3>
+                <p className="mb-6 text-lg">
+                  The NCAA core curriculum (core course) requirement ensures
+                  you’re taking high school courses that prepare you for the
+                  academic expectations of college. Note: Not all high school
+                  classes are NCAA-approved core courses and may not count
+                  toward your 16 core-course credit requirement.
                 </p>
-                <ul className="ps-7 pr-4 pb-4"> 
-                  <li>-English</li>
-                  <li>-World</li>
-                  <li>-Language</li>
-                  <li>-Math (Algebra I or higher)</li>
-                  <li>-Social Science</li>
-                  <li>-Religion or Philosophy</li>
-                  <li>Is taught by a qualified instructor.</li>
-                  <li>
-                    Is taught at or above your high schools regular academic
-                    level.
-                  </li>
-                  <li>
-                    You receive credit toward high school graduation and the
-                    course appears on an official transcript with course title,
-                    grade and credit awarded.
-                  </li>
-                  <li>Courses that ARE NOT NCAA-approved</li>
-                  <li>
-                    Is in a noncore area, such as driver education. typing, art,
-                    music, physical education or welding Prepares you for work
-                    or life, or for a two-year college or technical school, such
-                    as personal tinance. consumer education or tech prep.
-                  </li>
-                  <li>
-                    Is tauølt below grade level. at a slower pace or with less
-                    rigour or depth. such as basic, essential, fundamental. or
-                    foundational courses.
-                  </li>
-                  <li>Is a credit-by-exam course.</li>
+                <h3 className="font-bold">What is a Core Course?</h3>
+                <h3>
+                An NCAA-approved core course must meet the following requirements::
+                </h3>
+                <h3 className="font-bold">
+                  Is a four-year college preparatory course in one of these
+                  subject areas:
+                </h3>
+                <ul className="font-bold leading-[45px]">
+                  <li><span className="mr-5 ">- </span>English</li>
+                  <li><span className="mr-5 ">- </span>Science (Including one year of lab, if offered)</li>
+                  <li><span className="mr-5 ">- </span>World</li>
+                  <li><span className="mr-5 ">- </span>Language</li>
+                  <li><span className="mr-5 ">- </span>Math (Algebra I or higher)</li>
+                  <li><span className="mr-5 ">- </span> Social Science</li>
+                  <li><span className="mr-5 ">- </span> Comparative</li>
+                  <li><span className="mr-5 ">- </span> Religion or Philosophy</li>
+                </ul>
+                <ul>
+                  <li className=" text-lg my-5 ">Additionally:</li>
+                  <li className=" text-lg mb-3"><span className="mr-5">- </span>      Is taught by a qualified instructor.</li>
+                  <li className=" text-lg mb-3"><span className="mr-5">- </span>      Is taught at or above your high school’s regular academic level.</li>
+                  <li className=" text-lg mb-3"><span className="mr-5">- </span>      You receive credit toward high school graduation and the course appears on an official transcript with course title, grade and credit awarded.</li>
+                  <li className=" text-lg mb-5">Courses that <span className="underline font-extrabold text-xl ms-2 mr-2 ">ARE NOT</span> NCAA-approved</li>
+                  <li className=" text-lg mb-3"><span className="mr-5">- </span>       Is in a noncore area, such as driver education, typing, art, music, physical education or welding.</li>
+                  <li className=" text-lg mb-3"><span className="mr-5">- </span>        Prepares you for work or life, or for a two-year college or technical school, such as personal finance, consumer education or tech prep.</li>
+                  <li className=" text-lg mb-3"><span className="mr-5">- </span> Is taught below grade level, at a slower pace or with less rigour or depth, such as basic, essential, fundamental or foundational courses</li>
+                  <li className=" text-lg mb-7"><span className="mr-5">- </span>  Is a credit-by-exam course.</li>
+                  <li className=" text-lg mb-3">Courses that meet the above criteria must be submitted to and approved by the Eligibility Center. Approved classes are included on your high school’s list of NCAA-approved core courses.</li>
                 </ul>
               </div>
             </Accordion.Content>
@@ -350,15 +357,14 @@ const CalculationPage = () => {
         </Accordion>
       </div>
       <div className="md:px-[87px] md:py-[90px] px-[20px] py-[20px]  box-shadow-class">
-      {loading && <ScaleLoader color="#36d7b7" />}
-      <form onSubmit={handleFormSubmit}>
-        <Tabs style="underline">
-          <Tabs.Item ring-0 active title="Grade - 9">
-
+        {loading && <ScaleLoader color="#36d7b7" />}
+        <form onSubmit={handleFormSubmit}>
+          <Tabs style="underline">
+            <Tabs.Item ring-0 active title="Grade - 9">
               <div className="md:md:flex  justify-between md:gap-8">
                 <div className="md:w-1/4 relative  ">
                   <input
-                    className="py-3 px-[18px] mb-6 bg-[#FDF0EA] border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] mb-6 bg-[#F7C0A5] border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c1course1"
                     id="g9c1course1"
                     placeholder="Type Your Course Title..."
@@ -369,7 +375,7 @@ const CalculationPage = () => {
                 <div className="md:w-1/4 relative">
                   <div className="relative">
                     <select
-                      className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-full pr-8"
+                      className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-full pr-8"
                       name="g9c1subject1"
                       id="g9c1subject1"
                       required={requiredFields.g9c1subject1}
@@ -379,7 +385,7 @@ const CalculationPage = () => {
                       <option value="Math">Math (Algebra I or higher)</option>
                       <option value="Science">Science</option>
                       <option value="Language">Language</option>
-                      <option value="Social">Social</option>
+                      <option value="Social">Social Sciences</option>
                       <option value="Comparative">Comparative</option>
                       <option value="Religion or Philosophy">
                         Religion or Philosophy
@@ -392,7 +398,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c1grade1"
                     id="g9c1grade1"
                     required={requiredFields.g9c1grade1}
@@ -400,7 +406,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -409,7 +415,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c1cradit1"
                     id="g9c1cradit1"
                     required={requiredFields.g9c1cradit1}
@@ -417,7 +423,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25 </option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -428,7 +434,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c2course2"
                     id="g9c2course2"
                     placeholder="Type Your Course Title..."
@@ -438,7 +444,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c2subject2"
                     id="g9c2subject2"
                     required={requiredFields.g9c2subject2}
@@ -448,7 +454,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -460,7 +466,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c2grade2"
                     id="g9c2grade2"
                     required={requiredFields.g9c2grade2}
@@ -468,7 +474,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -477,7 +483,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c2cradit2"
                     id="g9c2cradit2"
                     required={requiredFields.g9c2cradit2}
@@ -485,7 +491,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -496,7 +502,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c3course3"
                     id="g9c3course3"
                     placeholder="Type Your Course Title..."
@@ -506,7 +512,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c3subject3"
                     id="g9c3subject3"
                     required={requiredFields.g9c3subject3}
@@ -516,7 +522,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -528,7 +534,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c3grade3"
                     id="g9c3grade3"
                     required={requiredFields.g9c3grade3}
@@ -536,7 +542,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -545,7 +551,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c3cradit3"
                     id="g9c3cradit3"
                     required={requiredFields.g9c3cradit3}
@@ -553,7 +559,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -564,7 +570,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c4course4"
                     id="g9c4course4"
                     placeholder="Type Your Course Title..."
@@ -574,7 +580,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c4subject4"
                     id="g9c4subject4"
                     required={requiredFields.g9c4subject4}
@@ -584,7 +590,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -596,7 +602,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c4grade4"
                     id="g9c4grade4"
                     required={requiredFields.g9c4grade4}
@@ -604,7 +610,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -613,7 +619,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c4cradit4"
                     id="g9c4cradit4"
                     required={requiredFields.g9c4cradit4}
@@ -621,7 +627,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -632,7 +638,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c5course5"
                     id="g9c5course5"
                     placeholder="Type Your Course Title..."
@@ -642,7 +648,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c5subject5"
                     id="g9c5subject5"
                     required={requiredFields.g9c5subject5}
@@ -652,7 +658,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -664,7 +670,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c5grade5"
                     id="g9c5grade5"
                     required={requiredFields.g9c5grade5}
@@ -672,7 +678,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -681,7 +687,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c5cradit5"
                     id="g9c5cradit5"
                     required={requiredFields.g9c5cradit5}
@@ -689,7 +695,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -700,7 +706,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c6course6"
                     id="g9c6course6"
                     placeholder="Type Your Course Title..."
@@ -710,7 +716,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c6subject6"
                     id="g9c6subject6"
                     required={requiredFields.g9c6subject6}
@@ -720,7 +726,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -732,7 +738,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c6grade6"
                     id="g9c6grade6"
                     required={requiredFields.g9c6grade6}
@@ -740,7 +746,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -749,7 +755,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c6cradit6"
                     id="g9c6cradit6"
                     required={requiredFields.g9c6cradit6}
@@ -757,7 +763,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -768,7 +774,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c7course7"
                     id="g9c7course7"
                     placeholder="Type Your Course Title..."
@@ -778,7 +784,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c7subject7"
                     id="g9c7subject7"
                     required={requiredFields.g9c7subject7}
@@ -788,7 +794,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -800,7 +806,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c7grade7"
                     id="g9c7grade7"
                     required={requiredFields.g9c7grade7}
@@ -808,7 +814,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -817,7 +823,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6   border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6   border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c7cradit7"
                     id="g9c7cradit7"
                     required={requiredFields.g9c7cradit7}
@@ -825,7 +831,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -836,7 +842,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c8course8"
                     id="g9c8course8"
                     placeholder="Type Your Course Title..."
@@ -846,7 +852,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c8subject8"
                     id="g9c8subject8"
                     required={requiredFields.g9c8subject8}
@@ -856,7 +862,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -868,7 +874,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c8grade8"
                     id="g9c8grade8"
                     required={requiredFields.g9c8grade8}
@@ -876,7 +882,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -885,7 +891,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c8cradit8"
                     id="g9c8cradit8"
                     required={requiredFields.g9c8cradit8}
@@ -893,7 +899,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -904,7 +910,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c9course9"
                     id="g9c9course9"
                     placeholder="Type Your Course Title..."
@@ -914,7 +920,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c9subject9"
                     id="g9c9subject9"
                     required={requiredFields.g9c9subject9}
@@ -924,7 +930,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -936,7 +942,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c9grade9"
                     id="g9c9grade9"
                     required={requiredFields.g9c9grade9}
@@ -944,7 +950,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -953,7 +959,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c9cradit9"
                     id="g9c9cradit9"
                     required={requiredFields.g9c9cradit9}
@@ -961,7 +967,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -972,7 +978,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c10course10"
                     id="g9c10course10"
                     placeholder="Type Your Course Title..."
@@ -982,7 +988,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c10subject10"
                     id="g9c10subject10"
                     required={requiredFields.g9c10subject10}
@@ -992,7 +998,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1004,7 +1010,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c10grade10"
                     id="g9c10grade10"
                     required={requiredFields.g9c10grade10}
@@ -1012,7 +1018,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1021,7 +1027,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g9c10cradit10"
                     id="g9c10cradit10"
                     required={requiredFields.g9c10cradit10}
@@ -1029,7 +1035,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1037,12 +1043,12 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-          </Tabs.Item>
-          <Tabs.Item title="Grade - 10">
+            </Tabs.Item>
+            <Tabs.Item title="Grade - 10">
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c1course1"
                     id="g10c1course1"
                     placeholder="Type Your Course Title..."
@@ -1052,7 +1058,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c1subject1"
                     id="g10c1subject1"
                     required={requiredFields.g10c1subject1}
@@ -1062,7 +1068,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1074,7 +1080,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c1grade1"
                     id="g10c1grade1"
                     required={requiredFields.g10c1grade1}
@@ -1082,7 +1088,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1091,7 +1097,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c1cradit1"
                     id="g10c1cradit1"
                     required={requiredFields.g10c1cradit1}
@@ -1099,7 +1105,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1110,7 +1116,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c2course2"
                     id="g10c2course2"
                     placeholder="Type Your Course Title..."
@@ -1120,7 +1126,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c2subject2"
                     id="g10c2subject2"
                     required={requiredFields.g10c2subject2}
@@ -1130,7 +1136,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1142,7 +1148,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c2grade2"
                     id="g10c2grade2"
                     required={requiredFields.g10c2grade2}
@@ -1150,7 +1156,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1159,7 +1165,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c2cradit2"
                     id="g10c2cradit2"
                     required={requiredFields.g10c2cradit2}
@@ -1167,7 +1173,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1178,7 +1184,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c3course3"
                     id="g10c3course3"
                     placeholder="Type Your Course Title..."
@@ -1188,7 +1194,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c3subject3"
                     id="g10c3subject3"
                     required={requiredFields.g10c3subject3}
@@ -1198,7 +1204,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1210,7 +1216,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c3grade3"
                     id="g10c3grade3"
                     required={requiredFields.g10c3grade3}
@@ -1218,7 +1224,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1227,7 +1233,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c3cradit3"
                     id="g10c3cradit3"
                     required={requiredFields.g10c3cradit3}
@@ -1235,7 +1241,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1246,7 +1252,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c4course4"
                     id="g10c4course4"
                     placeholder="Type Your Course Title..."
@@ -1256,7 +1262,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c4subject4"
                     id="g10c4subject4"
                     required={requiredFields.g10c4subject4}
@@ -1266,7 +1272,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1278,7 +1284,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c4grade4"
                     id="g10c4grade4"
                     required={requiredFields.g10c4grade4}
@@ -1286,7 +1292,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1295,7 +1301,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c4cradit4"
                     id="g10c4cradit4"
                     required={requiredFields.g10c4cradit4}
@@ -1303,7 +1309,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1314,7 +1320,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c5course5"
                     id="g10c5course5"
                     placeholder="Type Your Course Title..."
@@ -1324,7 +1330,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c5subject5"
                     id="g10c5subject5"
                     required={requiredFields.g10c5subject5}
@@ -1334,7 +1340,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1346,7 +1352,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c5grade5"
                     id="g10c5grade5"
                     required={requiredFields.g10c5grade5}
@@ -1354,7 +1360,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1363,7 +1369,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c5cradit5"
                     id="g10c5cradit5"
                     required={requiredFields.g10c5cradit5}
@@ -1371,7 +1377,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1382,7 +1388,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c6course6"
                     id="g10c6course6"
                     placeholder="Type Your Course Title..."
@@ -1392,7 +1398,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c6subject6"
                     id="g10c6subject6"
                     required={requiredFields.g10c6subject6}
@@ -1402,7 +1408,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1414,7 +1420,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c6grade6"
                     id="g10c6grade6"
                     required={requiredFields.g10c6grade6}
@@ -1422,7 +1428,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1431,7 +1437,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c6cradit6"
                     id="g10c6cradit6"
                     required={requiredFields.g10c6cradit6}
@@ -1439,7 +1445,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1450,7 +1456,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c7course7"
                     id="g10c7course7"
                     placeholder="Type Your Course Title..."
@@ -1460,7 +1466,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c7subject7"
                     id="g10c7subject7"
                     required={requiredFields.g10c7subject7}
@@ -1470,7 +1476,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1482,7 +1488,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c7grade7"
                     id="g10c7grade7"
                     required={requiredFields.g10c7grade7}
@@ -1490,7 +1496,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1499,7 +1505,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c7cradit7"
                     id="g10c7cradit7"
                     required={requiredFields.g10c7cradit7}
@@ -1507,7 +1513,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1518,7 +1524,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c8course8"
                     id="g10c8course8"
                     placeholder="Type Your Course Title..."
@@ -1528,7 +1534,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c8subject8"
                     id="g10c8subject8"
                     required={requiredFields.g10c8subject8}
@@ -1538,7 +1544,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1550,7 +1556,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c8grade8"
                     id="g10c8grade8"
                     required={requiredFields.g10c8grade8}
@@ -1558,7 +1564,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1567,7 +1573,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c8cradit8"
                     id="g10c8cradit8"
                     required={requiredFields.g10c8cradit8}
@@ -1575,7 +1581,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1586,7 +1592,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c9course9"
                     id="g10c9course9"
                     placeholder="Type Your Course Title..."
@@ -1596,7 +1602,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c9subject9"
                     id="g10c9subject9"
                     required={requiredFields.g10c9subject9}
@@ -1606,7 +1612,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1618,7 +1624,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c9grade9"
                     id="g10c9grade9"
                     required={requiredFields.g10c9grade9}
@@ -1626,7 +1632,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1634,8 +1640,8 @@ const CalculationPage = () => {
                   </div>
                 </div>
                 <div className="md:w-1/4 relative">
-                <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                  <select
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c8cradit8"
                     id="g10c8cradit8"
                     required={requiredFields.g10c9cradit9}
@@ -1643,7 +1649,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1654,7 +1660,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c10course10"
                     id="g10c10course10"
                     placeholder="Type Your Course Title..."
@@ -1664,7 +1670,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c10subject10"
                     id="g10c10subject10"
                     required={requiredFields.g10c10subject10}
@@ -1674,7 +1680,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1686,7 +1692,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c10grade10"
                     id="g10c10grade10"
                     required={requiredFields.g10c10grade10}
@@ -1694,7 +1700,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1703,7 +1709,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g10c10cradit10"
                     id="g10c10cradit10"
                     required={requiredFields.g10c10cradit10}
@@ -1711,7 +1717,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1719,12 +1725,12 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-          </Tabs.Item>
-          <Tabs.Item title="Grade - 11">
+            </Tabs.Item>
+            <Tabs.Item title="Grade - 11">
               <div className="md:md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c1course1"
                     id="g11c1course1"
                     placeholder="Type Your Course Title..."
@@ -1734,7 +1740,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c1subject1"
                     id="g11c1subject1"
                     required={requiredFields.g11c1subject1}
@@ -1744,7 +1750,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1756,7 +1762,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c1grade1"
                     id="g11c1grade1"
                     required={requiredFields.g11c1grade1}
@@ -1764,7 +1770,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1773,7 +1779,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c1cradit1"
                     id="g11c1cradit1"
                     required={requiredFields.g11c1cradit1}
@@ -1781,7 +1787,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1792,7 +1798,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c2course2"
                     id="g11c2course2"
                     placeholder="Type Your Course Title..."
@@ -1802,7 +1808,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c2subject2"
                     id="g11c2subject2"
                     required={requiredFields.g11c2subject2}
@@ -1812,7 +1818,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1824,7 +1830,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c2grade2"
                     id="g11c2grade2"
                     required={requiredFields.g11c2grade2}
@@ -1832,7 +1838,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1841,7 +1847,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c2cradit2"
                     id="g11c2cradit2"
                     required={requiredFields.g11c2cradit2}
@@ -1849,7 +1855,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1860,7 +1866,7 @@ const CalculationPage = () => {
               <div className="md:md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c3course3"
                     id="g11c3course3"
                     placeholder="Type Your Course Title..."
@@ -1870,7 +1876,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c3subject3"
                     id="g11c3subject3"
                     required={requiredFields.g11c3subject3}
@@ -1880,7 +1886,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1892,7 +1898,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c3grade3"
                     id="g11c3grade3"
                     required={requiredFields.g11c3grade3}
@@ -1900,7 +1906,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1909,7 +1915,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c3cradit3"
                     id="g11c3cradit3"
                     required={requiredFields.g11c3cradit3}
@@ -1917,7 +1923,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1928,7 +1934,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c4course4"
                     id="g11c4course4"
                     placeholder="Type Your Course Title..."
@@ -1938,7 +1944,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c4subject4"
                     id="g11c4subject4"
                     required={requiredFields.g11c4subject4}
@@ -1948,7 +1954,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -1960,7 +1966,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c4grade4"
                     id="g11c4grade4"
                     required={requiredFields.g11c4grade4}
@@ -1968,7 +1974,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1977,7 +1983,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c4cradit4"
                     id="g11c4cradit4"
                     required={requiredFields.g11c4cradit4}
@@ -1985,7 +1991,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -1996,7 +2002,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c5course5"
                     id="g11c5course5"
                     placeholder="Type Your Course Title..."
@@ -2006,7 +2012,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c5subject5"
                     id="g11c5subject5"
                     required={requiredFields.g11c5subject5}
@@ -2016,7 +2022,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2028,7 +2034,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c5grade5"
                     id="g11c5grade5"
                     required={requiredFields.g11c5grade5}
@@ -2036,7 +2042,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2045,7 +2051,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c5cradit5"
                     id="g11c5cradit5"
                     required={requiredFields.g11c5cradit5}
@@ -2053,7 +2059,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2064,7 +2070,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c6course6"
                     id="g11c6course6"
                     placeholder="Type Your Course Title..."
@@ -2074,7 +2080,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c6subject6"
                     id="g11c6subject6"
                     required={requiredFields.g11c6subject6}
@@ -2084,7 +2090,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2096,7 +2102,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c6grade6"
                     id="g11c6grade6"
                     required={requiredFields.g11c6grade6}
@@ -2104,7 +2110,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2113,7 +2119,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c6cradit6"
                     id="g11c6cradit6"
                     required={requiredFields.g11c6cradit6}
@@ -2121,7 +2127,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2132,7 +2138,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c7course7"
                     id="g11c7course7"
                     placeholder="Type Your Course Title..."
@@ -2142,7 +2148,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c7subject7"
                     id="g11c7subject7"
                     required={requiredFields.g11c7subject7}
@@ -2152,7 +2158,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2164,7 +2170,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c7grade7"
                     id="g11c7grade7"
                     required={requiredFields.g11c7grade7}
@@ -2172,7 +2178,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2181,7 +2187,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c7cradit7"
                     id="g11c7cradit7"
                     required={requiredFields.g11c7cradit7}
@@ -2189,7 +2195,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2200,7 +2206,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c8course8"
                     id="g11c8course8"
                     placeholder="Type Your Course Title..."
@@ -2210,7 +2216,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c8subject8"
                     id="g11c8subject8"
                     required={requiredFields.g11c8subject8}
@@ -2220,7 +2226,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2232,7 +2238,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c8grade8"
                     id="g11c8grade8"
                     required={requiredFields.g11c8grade8}
@@ -2240,7 +2246,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2249,7 +2255,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c8cradit8"
                     id="g11c8cradit8"
                     required={requiredFields.g11c8cradit8}
@@ -2257,7 +2263,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2268,7 +2274,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c9course9"
                     id="g11c9course9"
                     placeholder="Type Your Course Title..."
@@ -2278,7 +2284,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c9subject9"
                     id="g11c9subject9"
                     required={requiredFields.g11c9subject9}
@@ -2288,7 +2294,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2300,7 +2306,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c9grade9"
                     id="g11c9grade9"
                     required={requiredFields.g11c9grade9}
@@ -2308,7 +2314,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2317,7 +2323,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c9cradit9"
                     id="g11c9cradit9"
                     required={requiredFields.g11c9cradit9}
@@ -2325,7 +2331,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2336,7 +2342,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c10course10"
                     id="g11c10course10"
                     placeholder="Type Your Course Title..."
@@ -2346,7 +2352,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c10subject10"
                     id="g11c10subject10"
                     required={requiredFields.g11c10subject10}
@@ -2356,7 +2362,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2368,7 +2374,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c10grade10"
                     id="g11c10grade10"
                     required={requiredFields.g11c10grade10}
@@ -2376,7 +2382,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2385,7 +2391,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g11c10cradit10"
                     id="g11c10cradit10"
                     required={requiredFields.g11c10cradit10}
@@ -2393,7 +2399,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2401,12 +2407,12 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-          </Tabs.Item>
-          <Tabs.Item title="Grade - 12">
+            </Tabs.Item>
+            <Tabs.Item title="Grade - 12">
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c1course1"
                     id="g12c1course1"
                     placeholder="Type Your Course Title..."
@@ -2416,7 +2422,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c1subject1"
                     id="g12c1subject1"
                     required={requiredFields.g12c1subject1}
@@ -2426,7 +2432,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2438,7 +2444,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c1grade1"
                     id="g12c1grade1"
                     required={requiredFields.g12c1grade1}
@@ -2446,7 +2452,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2455,7 +2461,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c1cradit1"
                     id="g12c1cradit1"
                     required={requiredFields.g12c1cradit1}
@@ -2463,7 +2469,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2474,7 +2480,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c2course2"
                     id="g12c2course2"
                     placeholder="Type Your Course Title..."
@@ -2484,7 +2490,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c2subject2"
                     id="g12c2subject2"
                     required={requiredFields.g12c2subject2}
@@ -2494,7 +2500,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2506,7 +2512,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c2grade2"
                     id="g12c2grade2"
                     required={requiredFields.g12c2grade2}
@@ -2514,7 +2520,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2523,7 +2529,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c2cradit2"
                     id="g12c2cradit2"
                     required={requiredFields.g12c2cradit2}
@@ -2531,7 +2537,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2542,7 +2548,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c3course3"
                     id="g12c3course3"
                     placeholder="Type Your Course Title..."
@@ -2552,7 +2558,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c3subject3"
                     id="g12c3subject3"
                     required={requiredFields.g12c3subject3}
@@ -2562,7 +2568,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2574,7 +2580,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c3grade3"
                     id="g12c3grade3"
                     required={requiredFields.g12c3grade3}
@@ -2582,7 +2588,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2591,7 +2597,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c3cradit3"
                     id="g12c3cradit3"
                     required={requiredFields.g12c3cradit3}
@@ -2599,7 +2605,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2610,7 +2616,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c4course4"
                     id="g12c4course4"
                     placeholder="Type Your Course Title..."
@@ -2620,7 +2626,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c4subject4"
                     id="g12c4subject4"
                     required={requiredFields.g12c4subject4}
@@ -2630,7 +2636,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2642,7 +2648,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c4grade4"
                     id="g12c4grade4"
                     required={requiredFields.g12c4grade4}
@@ -2650,7 +2656,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2659,7 +2665,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c4cradit4"
                     id="g12c4cradit4"
                     required={requiredFields.g12c4cradit4}
@@ -2667,7 +2673,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2678,7 +2684,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c5course5"
                     id="g12c5course5"
                     placeholder="Type Your Course Title..."
@@ -2688,7 +2694,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c5subject5"
                     id="g12c5subject5"
                     required={requiredFields.g12c5subject5}
@@ -2698,7 +2704,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2710,7 +2716,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c5grade5"
                     id="g12c5grade5"
                     required={requiredFields.g12c5grade5}
@@ -2718,7 +2724,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2727,7 +2733,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c5cradit5"
                     id="g12c5cradit5"
                     required={requiredFields.g12c5cradit5}
@@ -2735,7 +2741,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2746,7 +2752,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c6course6"
                     id="g12c6course6"
                     placeholder="Type Your Course Title..."
@@ -2756,7 +2762,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c6subject6"
                     id="g12c6subject6"
                     required={requiredFields.g12c6subject6}
@@ -2766,7 +2772,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2778,7 +2784,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6 border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c6grade6"
                     id="g12c6grade6"
                     required={requiredFields.g12c6grade6}
@@ -2786,7 +2792,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2795,7 +2801,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c6cradit6"
                     id="g12c6cradit6"
                     required={requiredFields.g12c6cradit6}
@@ -2803,7 +2809,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2814,7 +2820,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c7course7"
                     id="g12c7course7"
                     placeholder="Type Your Course Title..."
@@ -2824,7 +2830,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c7subject7"
                     id="g12c7subject7"
                     required={requiredFields.g12c7subject7}
@@ -2834,7 +2840,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2846,7 +2852,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c7grade7"
                     id="g12c7grade7"
                     required={requiredFields.g12c7grade7}
@@ -2854,7 +2860,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2863,7 +2869,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c7cradit7"
                     id="g12c7cradit7"
                     required={requiredFields.g12c7cradit7}
@@ -2871,7 +2877,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2882,7 +2888,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c8course8"
                     id="g12c8course8"
                     placeholder="Type Your Course Title..."
@@ -2892,7 +2898,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c8subject8"
                     id="g12c8subject8"
                     required={requiredFields.g12c8subject8}
@@ -2902,7 +2908,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2914,7 +2920,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c8grade8"
                     id="g12c8grade8"
                     required={requiredFields.g12c8grade8}
@@ -2922,7 +2928,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2931,7 +2937,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c8cradit8"
                     id="g12c8cradit8"
                     required={requiredFields.g12c8cradit8}
@@ -2939,7 +2945,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2950,7 +2956,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c9course9"
                     id="g12c9course9"
                     placeholder="Type Your Course Title..."
@@ -2960,7 +2966,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c9subject9"
                     id="g12c9subject9"
                     required={requiredFields.g12c9subject9}
@@ -2970,7 +2976,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -2982,7 +2988,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c9grade9"
                     id="g12c9grade9"
                     required={requiredFields.g12c9grade9}
@@ -2990,7 +2996,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -2999,7 +3005,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c9cradit9"
                     id="g12c9cradit9"
                     required={requiredFields.g12c9cradit9}
@@ -3007,7 +3013,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -3018,7 +3024,7 @@ const CalculationPage = () => {
               <div className="md:flex justify-between gap-8 ">
                 <div className="md:w-1/4 relative">
                   <input
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c10course10"
                     id="g12c10course10"
                     placeholder="Type Your Course Title..."
@@ -3028,7 +3034,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c10subject10"
                     id="g12c10subject10"
                     required={requiredFields.g12c10subject10}
@@ -3038,7 +3044,7 @@ const CalculationPage = () => {
                     <option value="Math">Math (Algebra I or higher)</option>
                     <option value="Science">Science</option>
                     <option value="Language">Language</option>
-                    <option value="Social">Social</option>
+                    <option value="Social">Social Sciences</option>
                     <option value="Comparative ">Comparative</option>
                     <option value="Religion or Philosophy ">
                       Religion or Philosophy
@@ -3050,7 +3056,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c10grade10"
                     id="g12c10grade10"
                     required={requiredFields.g12c10grade10}
@@ -3058,7 +3064,7 @@ const CalculationPage = () => {
                     <option value="">Course Grade</option>
                     <option value="4">A (90-100)%</option>
                     <option value="3">B (80-89)%</option>
-                    <option value="3">C (70-79)%</option>
+                    <option value="2">C (70-79)%</option>
                     <option value="1">D (60-69)%</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -3067,7 +3073,7 @@ const CalculationPage = () => {
                 </div>
                 <div className="md:w-1/4 relative">
                   <select
-                    className="py-3 px-[18px] bg-[#FDF0EA] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
+                    className="py-3 px-[18px] bg-[#F7C0A5] mb-6  border-[1px] border-[#E9EDF3] rounded-lg w-[100%]"
                     name="g12c10cradit10"
                     id="g12c10cradit10"
                     required={requiredFields.g12c10cradit10}
@@ -3075,7 +3081,7 @@ const CalculationPage = () => {
                     <option value="">Unit of Credit</option>
                     <option value="0.25">1 quarter unit = 0.25</option>
                     <option value="0.34">1 trimester unit = 0.34</option>
-                    <option value="0.50">1 semesterr unit = 0.50</option>
+                    <option value="0.50">1 semester unit = 0.50</option>
                     <option value="1">1 year = 1</option>
                   </select>
                   <div className="absolute inset-y-0 right-1 -top-5 flex items-center pr-3 pointer-events-none">
@@ -3083,55 +3089,55 @@ const CalculationPage = () => {
                   </div>
                 </div>
               </div>
-          </Tabs.Item>
-        </Tabs>
-        <div className="mt-8 clc-radio-wrap">
-                <div className="md:flex items-center gap-3 text-xl">
-                  <label className="mr-5">Have you completed the SAT?</label>
-                  <div className="mr-5">
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="yes"
-                      name="satCompleted"
-                      value="yes"
-                      checked={satCompleted === "yes"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="yes">Yes</label>
-                  </div>
-                  <div>
-                    <input
-                      className="mr-1"
-                      type="radio"
-                      id="no"
-                      name="satCompleted"
-                      value="no"
-                      checked={satCompleted === "no"}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="no">No</label>
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <input
-                    className="py-3 px-[18px] bg-[#FFF] border-[1px] border-[#E9EDF3] rounded-lg"
-                    type="text"
-                    id="satScore"
-                    placeholder="Type your SAT score"
-                    disabled={satCompleted !== "yes"} // Disable input if satCompleted is not 'yes'
-                  />
-                </div>
-              </div>
-
-              <div className="text-center mt-16">
+            </Tabs.Item>
+          </Tabs>
+          <div className="mt-8 clc-radio-wrap">
+            <div className="md:flex items-center gap-3 text-xl">
+              <label className="mr-5">Have you completed the SAT?</label>
+              <div className="mr-5">
                 <input
-                  type="submit"
-                  className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#ED692A] duration-500  bg-[#21498B] text-white"
-                  value="Start GPA Calculation"
+                  className="mr-1"
+                  type="radio"
+                  id="yes"
+                  name="satCompleted"
+                  value="yes"
+                  checked={satCompleted === "yes"}
+                  onChange={handleRadioChange}
                 />
+                <label htmlFor="yes">Yes</label>
               </div>
+              <div>
+                <input
+                  className="mr-1"
+                  type="radio"
+                  id="no"
+                  name="satCompleted"
+                  value="no"
+                  checked={satCompleted === "no"}
+                  onChange={handleRadioChange}
+                />
+                <label htmlFor="no">No</label>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <input
+                className="py-3 px-[18px] bg-[#FFF] border-[1px] border-[#E9EDF3] rounded-lg"
+                type="text"
+                id="satScore"
+                placeholder="Type your SAT score"
+                disabled={satCompleted !== "yes"} // Disable input if satCompleted is not 'yes'
+              />
+            </div>
+          </div>
+
+          <div className="text-center mt-16">
+            <input
+              type="submit"
+              className="text-center px-6 py-4 rounded-lg cursor-pointer  hover:bg-[#ED692A] duration-500  bg-[#21498B] text-white"
+              value="Start GPA Calculation"
+            />
+          </div>
         </form>
       </div>
     </div>

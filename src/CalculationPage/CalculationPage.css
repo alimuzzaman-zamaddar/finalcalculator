@@ -88,7 +88,7 @@ button.text-center.px-6.py-4.rounded-lg.cursor-pointer.hover\:bg-\[\#0b111c\].du
 }
 
 button.flex.w-full.items-center.justify-between.first\:rounded-t-lg.last\:rounded-b-lg.py-5.px-5.text-left.font-medium.hover\:bg-gray-100.focus\:ring-4.focus\:ring-gray-200.dark\:hover\:bg-gray-800.dark\:focus\:ring-gray-800.text-gray-900.bg-gray-100.dark\:bg-gray-800.dark\:text-white {
-    background: #FDF0EA;
+    background: #F7C0A5;
     color: black;
     border-bottom: none;
     font-size: 22px !important;
@@ -99,7 +99,7 @@ button.flex.w-full.items-center.justify-between.first\:rounded-t-lg.last\:rounde
     font-size: 20px;
 }
 .py-5.px-5.last\:rounded-b-lg.dark\:bg-gray-900.first\:rounded-t-lg {
-    background: #FDF0EA;
+    background: #F7C0A5;
 }
 
 button.text-center.text-xl.px-6.py-4.rounded-lg.cursor-pointer.hover\:bg-\[\#ED692A\].duration-500.bg-\[\#21498B\].text-white {
@@ -108,8 +108,9 @@ button.text-center.text-xl.px-6.py-4.rounded-lg.cursor-pointer.hover\:bg-\[\#ED6
 
 button.flex.w-full.items-center.justify-between.first\:rounded-t-lg.last\:rounded-b-lg.py-5.px-5.text-left.font-medium.text-gray-500.dark\:text-gray-400.hover\:bg-gray-100.focus\:ring-4.focus\:ring-gray-200.dark\:hover\:bg-gray-800.dark\:focus\:ring-gray-800 {
     font-size: 22px !important;
-    background: #FDF0EA;
+    background: #F7C0A5;
     border-radius: 8px !important;
+    color: rgb(39, 39, 39);
 }
 
 body,p.span,h5,h6,a{

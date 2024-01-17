@@ -11,12 +11,54 @@ import Swal from "sweetalert2";
 const ShowResult = () => {
   const  selectedCourse =useLoaderData();
 
+  const calculateOverallGPA = (allDataOverall) => {
+    const totalGradeCreditProduct = allDataOverall.reduce((acc, data) => {
+      let gradeValue = 0, creditValue = 0;
+  
+      for (let i = 0; i < data.length; i++) {
+        const { grade9, credit9, grade10, credit10, grade11, credit11, grade12, credit12 } = data[i];
+  
+        if (grade9 && credit9) {
+          gradeValue = parseFloat(grade9);
+          creditValue = parseFloat(credit9);
+        } else if (grade10 && credit10) {
+          gradeValue = parseFloat(grade10);
+          creditValue = parseFloat(credit10);
+        } else if (grade11 && credit11) {
+          gradeValue = parseFloat(grade11);
+          creditValue = parseFloat(credit11);
+        } else if (grade12 && credit12) {
+          gradeValue = parseFloat(grade12);
+          creditValue = parseFloat(credit12);
+        }
+  
+        if (!isNaN(gradeValue) && !isNaN(creditValue)) {
+          acc.gradeCreditProduct += gradeValue * creditValue;
+          acc.totalCredits += creditValue;
+        }
+      }
+  
+      return acc;
+    }, { gradeCreditProduct: 0, totalCredits: 0 });
+  
+    const overallGPA = totalGradeCreditProduct.totalCredits !== 0
+      ? totalGradeCreditProduct.gradeCreditProduct / totalGradeCreditProduct.totalCredits
+      : 0;
+  
+    return overallGPA.toFixed(2);
+  };
+
+
+
+
   const calculateGPA = (selectedCourse) => {
     const { formDataG9, formDataG10, formDataG11, formDataG12 } = selectedCourse.allData;
   
     const allData = [formDataG9, formDataG10, formDataG11, formDataG12];
     const allData3 = [formDataG9, formDataG10, formDataG11];
     const allData2 = [formDataG9, formDataG10];
+    const allData5 = [formDataG10, formDataG11, formDataG12];
+    const allData4 = [formDataG11, formDataG12];
     const allData9 = [formDataG9];
     const allData10 = [formDataG10];
     const allData11 = [formDataG11];
@@ -64,28 +106,56 @@ const ShowResult = () => {
   
     if (formDataG9 && formDataG10 && formDataG11 && formDataG12) {
       const GPAs = allData.map((formData) => calculateGradeCreditProduct(formData));
-  
+      const overallGPA = calculateOverallGPA(allData);
+
       return {
         grade9result: GPAs[0].toFixed(2),
         grade10result: GPAs[1].toFixed(2),
         grade11result: GPAs[2].toFixed(2),
         grade12result: GPAs[3].toFixed(2),
+        grandTotalGPA: overallGPA,
+        
         satScore,
         grandFinalResult
       };
     } else if(formDataG9 && formDataG10 && formDataG11) {
       const GPAs = allData3.map((formData) => calculateGradeCreditProduct(formData));
+      const overallGPA = calculateOverallGPA(allData3);
+  
       return {
         grade9result: GPAs[0].toFixed(2),
         grade10result: GPAs[1].toFixed(2),
         grade11result: GPAs[2].toFixed(2),
+        grandTotalGPA: overallGPA,
         satScore,
       };
+    }else if(formDataG10 && formDataG11 && formDataG12){
+      const GPAs = allData5.map((formData) => calculateGradeCreditProduct(formData));
+      const overallGPA = calculateOverallGPA(allData5);
+      return {
+        grade10result: GPAs[0].toFixed(2),
+        grade11result: GPAs[1].toFixed(2),
+        grade12result: GPAs[1].toFixed(2),
+        grandTotalGPA: overallGPA,
+        satScore,
+      };
+
     }else if(formDataG9 && formDataG10 ){
       const GPAs = allData2.map((formData) => calculateGradeCreditProduct(formData));
+      const overallGPA = calculateOverallGPA(allData2);
       return {
         grade9result: GPAs[0].toFixed(2),
         grade10result: GPAs[1].toFixed(2),
+        grandTotalGPA: overallGPA,
+        satScore,
+      };
+    }else if(formDataG11 && formDataG12){
+      const GPAs = allData4.map((formData) => calculateGradeCreditProduct(formData));
+      const overallGPA = calculateOverallGPA(allData4);
+      return {
+        grade11result: GPAs[0].toFixed(2),
+        grade12result: GPAs[1].toFixed(2),
+        grandTotalGPA: overallGPA,
         satScore,
       };
     }else if(formDataG9){
@@ -154,11 +224,8 @@ const ShowResult = () => {
             <section className="progressbar  ">
               <CircularProgress
                 grandFinalResult={
-                  totalGPAforall.grade9result ||
-                  totalGPAforall.grade10result ||
-                  totalGPAforall.grade11result ||
-                  totalGPAforall.grade12result ||
-                  ""
+           
+                  totalGPAforall.grandTotalGPA  || totalGPAforall.grade9result || totalGPAforall.grade10result || totalGPAforall.grade11result || totalGPAforall.grade12result || ""
                 }
               ></CircularProgress>
             </section>
@@ -179,11 +246,7 @@ const ShowResult = () => {
               >
                 <LineProg
                   grandFinalResult={
-                    totalGPAforall.grade9result ||
-                    totalGPAforall.grade10result ||
-                    totalGPAforall.grade11result ||
-                    totalGPAforall.grade12result ||
-                    ""
+                    totalGPAforall.grandTotalGPA  || totalGPAforall.grade9result || totalGPAforall.grade10result || totalGPAforall.grade11result || totalGPAforall.grade12result || ""
                   }
                 ></LineProg>
               </section>
